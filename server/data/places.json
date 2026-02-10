@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "placeName": "Eiffel Tower",
+    "location": "Paris, France",
+    "dateVisited": "2025-06-15",
+    "description": "Iconic iron lattice tower on the Champ de Mars. Stunning views of Paris from the top observation deck. Visited during sunset, absolutely breathtaking!",
+    "rating": 5,
+    "addedBy": "1",
+    "imageUrl": "https://images.unsplash.com/photo-1720988583730-1191f37e5fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXJpcyUyMGVpZmZlbCUyMHRvd2VyJTIwbGFuZG1hcmt8ZW58MXx8fHwxNzcwMDM4NjE2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  {
+    "id": "2",
+    "placeName": "Senso-ji Temple",
+    "location": "Tokyo, Japan",
+    "dateVisited": "2025-09-22",
+    "description": "Ancient Buddhist temple in Asakusa. Beautiful traditional architecture with the famous Kaminarimon gate. Great shopping street leading up to the temple.",
+    "rating": 5,
+    "addedBy": "2",
+    "imageUrl": "https://images.unsplash.com/photo-1594311879147-c172ced24621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b2t5byUyMGphcGFuJTIwdGVtcGxlfGVufDF8fHx8MTc3MDEwODk3MXww&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  {
+    "id": "3",
+    "placeName": "Empire State Building",
+    "location": "New York City, USA",
+    "dateVisited": "2024-12-10",
+    "description": "Historic Art Deco skyscraper in Midtown Manhattan. The observation deck offers panoramic views of NYC. Best visited at night to see the city lights.",
+    "rating": 4,
+    "addedBy": "3",
+    "imageUrl": "https://images.unsplash.com/photo-1514565131-fce0801e5785?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmV8ZW58MXx8fHwxNzcwMTEyMDE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+  },
+  {
+    "id": "4",
+    "placeName": "Machu Picchu",
+    "location": "Cusco Region, Peru",
+    "dateVisited": "2025-03-08",
+    "description": "15th-century Inca citadel in the Andes Mountains. Incredible ancient ruins with stunning mountain backdrop. A must-see world wonder!",
+    "rating": 5,
+    "addedBy": "4",
+    "imageUrl": "https://images.unsplash.com/photo-1580619305218-8423a7ef79b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYWNodSUyMHBpY2NodSUyMHBlcnV8ZW58MXx8fHwxNzcwMDQ2NjExfDA&ixlib=rb-4.1.0&q=80&w=1080"
+  }
+]
