@@ -10,27 +10,6 @@ app.use(cors());
 // For CSS,Images
 app.use(express.static(path.join(__dirname, "public")));
 
-// Paths
-//Homepage
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "/index.html"))
-});
-
-//Add place page
-app.get('/addplace', (req, res) => {
-  res.sendFile(path.join(__dirname, "/addplace.html"))
-});
-
-//About App Page
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, "/about.html"))
-});
-
-//Error 404
-app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname, "error404.html"));
-});
-
 // GET all places
 app.get("/api/places", (req, res) => {
 
