@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route, Link } from "react-router-dom";
 import AddPlace from "./pages/AddPlace";
 import About from "./pages/About";
+import Home from "./pages/Home";
 import Error404 from "./pages/Error404";
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
       <main className="main">
         <Routes>
-          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/" element={<Home />} />
           <Route path="/addplace" element={<AddPlace />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<Error404 />} />
