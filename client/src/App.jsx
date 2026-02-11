@@ -7,22 +7,22 @@ import Error404 from "./pages/Error404";
 
 function App() {
   return (
-    <>
-      <nav>
+    <div className="app">
+      <nav className="nav">
         <Link to="/">Home</Link> |{" "}
         <Link to="/addplace">Add Place</Link> |{" "}
         <Link to="/about">About</Link>
       </nav>
 
-
-      <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/addplace" element={<AddPlace />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<Error404 />} />
-      </Routes>
-   
-    </>
+      <main className="main">
+        <Routes>
+          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/addplace" element={<AddPlace />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </main>
+    </div>
   )
 }
 
