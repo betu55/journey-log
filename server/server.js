@@ -28,7 +28,7 @@ app.post("/api/places", express.json(), (req, res) => {
   if(newPlace && newPlace.placeName && newPlace.location && newPlace.dateVisited && newPlace.description && newPlace.rating){
     
     if(!newPlace.imageUrl){
-      newPlace.imageUrl = false //Set to default image later
+      newPlace.imageUrl = "/images/default-Image.jpg";
     }
 
     // Calculate ID number for each new entry
