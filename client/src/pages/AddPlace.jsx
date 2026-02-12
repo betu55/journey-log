@@ -46,11 +46,11 @@ function AddPlace() {
     };
 
     return (
-        <div className="page container">
+        <div className="page">
             <h1>Add New Journey</h1>
             <AddPlaceForm onSubmit={handleSubmit} className="add-form">
                 <div className="form-group">
-                    <label>Location (City/Country):</label>
+                    <label>Location (City/Country) *</label>
                     <input 
                         name="location" 
                         value={formData.location} 
@@ -60,7 +60,7 @@ function AddPlace() {
                 </div>
 
                 <div className="form-group">
-                    <label>Site Name:</label>
+                    <label>Site Name *</label>
                     <input 
                         name="placeName" 
                         value={formData.placeName} 
@@ -70,7 +70,7 @@ function AddPlace() {
                 </div>
 
                 <div className="form-group">
-                    <label>Date:</label>
+                    <label>Date *</label>
                     <input 
                         name="dateVisited" 
                         type="date"        
@@ -81,7 +81,7 @@ function AddPlace() {
                 </div>
 
                 <div className="form-group">
-                    <label>Rating (1-5):</label>
+                    <label>Rating (1-5) *</label>
                     <input 
                         name="rating" 
                         type="number" 
@@ -89,11 +89,12 @@ function AddPlace() {
                         max="5" 
                         value={formData.rating} 
                         onChange={handleChange} 
+                        required 
                     />
                 </div>
 
                 <div className="form-group">
-                    <label>Description:</label>
+                    <label>Description</label>
                     <textarea 
                         name="description" 
                         value={formData.description} 
@@ -102,7 +103,7 @@ function AddPlace() {
                 </div>
 
                 <div className="form-group">
-                    <label>Image URL:</label>
+                    <label>Image URL</label>
                     <input 
                         name="imageUrl" 
                         value={formData.imageUrl} 
