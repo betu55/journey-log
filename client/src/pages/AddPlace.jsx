@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'; 
+import AddPlaceForm from '../components/AddPlaceForm';
 
 function AddPlace() {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ function AddPlace() {
     return (
         <div className="page container">
             <h1>Add New Journey</h1>
-            <form onSubmit={handleSubmit} className="add-form">
+            <AddPlaceForm onSubmit={handleSubmit} className="add-form">
                 <div className="form-group">
                     <label>Location (City/Country):</label>
                     <input 
@@ -109,11 +110,7 @@ function AddPlace() {
                         placeholder="https://..." 
                     />
                 </div>
-
-                <Button type="submit" variant="primary" width="auto">
-                    Save Journey
-                </Button>
-            </form>
+            </AddPlaceForm>
         </div>
     );
 }
