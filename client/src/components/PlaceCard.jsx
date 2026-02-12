@@ -24,7 +24,7 @@ function PlaceCard({
     <div className="place-card">
       {onDelete && (
         <div className="place-card__action">
-          <Button variant="danger" width="fit" onClick={onDelete}>
+          <Button variant="danger-light" width="fit" onClick={onDelete}>
             <FaTrash size={12} />
           </Button>
         </div>

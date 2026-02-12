@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  width: 94%;
+  width: 85%;
   margin: 1rem auto 0;
   padding: 1.5rem 1.25rem 1.75rem;
   border: 1px solid #ddd;
@@ -141,16 +141,23 @@
 }
 
 .place-location {
-  color: gray;
+  color: #888;
   font-size: 14px;
   margin: 0;
   margin-bottom: 2rem;
 }
 
 .place-description{
+  color: #555;
   font-size: small;
   padding-bottom: 1rem;
   border-bottom: solid 1px #ddd;
+}
+
+.place-date{
+  font-size: 14px;
+  color: #888;
+  margin-top: 0.5rem;
 }
 
 .place-card__action {
@@ -172,7 +179,7 @@
 
 @media (min-width: 640px) {
   .add-form {
-    width: 80%;
+    width: 60%;
     max-width: 480px;
   }
   .place-list { grid-template-columns: repeat(2, 1fr); }
@@ -181,7 +188,7 @@
 @media (min-width: 1024px) {
   .add-form {
     width: 70%;
-    max-width: 420px;
+    max-width: 500px;
   }
   .form-group label {
     font-weight: 500;
@@ -195,9 +202,11 @@
 .btn-primary { background: #A1CCA5; color: white; border-color: transparent;}
 .btn-primary:hover { background: #8bb48c; color: white; border-color: transparent;}
 .btn-secondary { background: transparent; color: black; border-color: transparent; }
-.btn-secondary:hover { background: gray; color: white; border-color: transparent;}
+.btn-secondary:hover { background: 888; color: white; border-color: transparent;}
 .btn-danger { background: #EB5f59; color: #fff; border-color: transparent; }
 .btn-danger:hover { background: #d14b44; color: #fff; border-color: transparent;}
+.btn-danger-light { background: transparent; color: #888; border-color: #ddd; }
+.btn-danger-light:hover { background: #EB5f59; color: #fff; border-color: transparent;}
 
 .btn-auto { width: auto; }
 .btn-full { width: 100%; }
