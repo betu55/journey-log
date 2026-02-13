@@ -36,11 +36,13 @@ In the future, Journey Log can be extended into a full MERN application with mul
 
   - Highly reusable Button component: serves multiple purposes—from submitting forms to deleting logs and navigating back to home.
 
-  - Dynamic UI with PlaceCards: elegantly display travel logs, integratinng delete triggers for a clean user interface.
+  - Dynamic UI with PlaceCards: elegantly display travel logs, integrating delete triggers for a clean user interface.
 
   - Successful data flow: users can add a new journey and see it instantly rendered as a new card on the dashboard.
 
   - Solid navigation structure: includes a custom 404 handler that ensures a smooth user experience even when a path is not found.
+
+  - Live search feature: Allows for easy search and displays places by place name
 
 3. Challenges
 
