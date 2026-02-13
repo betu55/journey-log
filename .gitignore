@@ -20,3 +20,6 @@ build/
 logs
 *.log
 npm-debug.log*
+
+# Mac system files
+.DS_Store
