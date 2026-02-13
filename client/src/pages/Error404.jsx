@@ -4,7 +4,7 @@ function Error404() {
     return (
         <div className='page container'>
             <p className="error-404">404</p>
-            <h1>Sorry that page does not exist.</h1>
+            <h1>Oops! The page you’re looking for doesn’t exist.</h1>
             <Button
             variant="secondary"
             width="auto"
