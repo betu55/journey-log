@@ -17,19 +17,19 @@ function About() {
 
           <div className="about-text">
             <h2>
-              We’re here to help you keep your journeys{" "}
+              We are here to help you keep your journeys{" "}
               <span className="highlight">alive</span>.
             </h2>
 
             <p>
-              Journey Log isn’t just about saving places — it’s about preserving
+              Journey Log isn’t just about saving places - it’s about preserving
               memories. Whether it’s a spontaneous weekend getaway, a world-famous
-              landmark, or a hidden café, every story deserves a place.
+              landmark, or a hidden cafe, every story deserves a place.
             </p>
 
             <p>
               We believe travel experiences shape who you are. With Journey Log,
-              your memories stay organized, visual, and meaningful — long after
+              your memories stay organized, visual, and meaningful - long after
               the trip ends.
             </p>
           </div>

@@ -4,9 +4,54 @@
   flex-direction: column;
 }
 
-.nav{
-  padding: 1rem 0;
+/* NAVBAR */
+
+.nav {
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 0;
 }
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #A1CCA5;
+}
+
+.nav-links a.active {
+  color: #A1CCA5;
+  border-bottom: 2px solid #A1CCA5;
+  padding-bottom: 4px;
+}
+
 
 .main{
   flex: 1;
