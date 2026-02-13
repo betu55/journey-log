@@ -343,3 +343,20 @@
 .btn-auto { width: auto; }
 .btn-full { width: 100%; }
 .btn-fit { width: fit-content; }
+
+.search-wrapper {
+  width: 100%;             
+  align-self: stretch;      
+  margin: 40px 0;
+}
+
+.search-input {
+  width: 100%;            
+  padding: 20px 30px;     
+  font-size: 15px;         
+  border-radius: 50px;
+  border: 1.5px solid teal;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
