@@ -45,9 +45,10 @@ function Home() {
 
   return (
     <div className="page">
-      <h1>Home Page</h1>
-
-      <SearchBar placeName={searchQuery} setPlaceName={setSearchQuery} />
+      <div className="page-header">
+        <h1>Home Page</h1>
+        <SearchBar placeName={searchQuery} setPlaceName={setSearchQuery} />
+      </div>
 
       {loading && <p>Loading places...</p>}
       {error && <p>{error}</p>}
@@ -55,7 +56,7 @@ function Home() {
       {!loading && !error && (
         <div className="place-list">
           {places.length === 0 ? (
-            <p>No places yet. Add one to get started.</p>
+            <p>Add more places to see them here.</p>
           ) : (
             places.map((place) => (
               <PlaceCard
