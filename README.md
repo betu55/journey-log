@@ -25,4 +25,23 @@ In the future, Journey Log can be extended into a full MERN application with mul
 - Once the project is up and running click the url in your terminal and the app will open in a new tab on your browser.
 
 ## Reflection
-*Work in progress*
+
+1. Submitted Content
+
+    The project delivers a polished, responsive interface across four main views: Home, Add Place, About, and a custom 404 page.
+
+2. Successes & Achievements
+
+  - Navigation Bar: provides intuitive transitions between routes, maintaining a professional look and feel throughout the application.
+
+  - Highly reusable Button component: serves multiple purposes—from submitting forms to deleting logs and navigating back to home.
+
+  - Dynamic UI with PlaceCards: elegantly display travel logs, integratinng delete triggers for a clean user interface.
+
+  - Successful data flow: users can add a new journey and see it instantly rendered as a new card on the dashboard.
+
+  - Solid navigation structure: includes a custom 404 handler that ensures a smooth user experience even when a path is not found.
+
+3. Challenges
+
+    Environment Configuration: We overcame persistent Git 403 Forbidden errors by migrating the workflow to a macOS environment.
