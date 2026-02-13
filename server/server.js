@@ -14,13 +14,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // GET all places
 app.get("/api/places", (req, res) => {
-
-  if (places.length > 0) {
-    res.status(200).json({success: true, data: places});
-  } else{
-    res.status(404).json({ error: "No places found" });
-  }
-
+  res.status(200).json({success: true, data: places}); // returns empty collection even if no places
 });
 
 // POST/Create a new place
