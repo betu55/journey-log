@@ -180,7 +180,7 @@
   position: relative;
   border: solid 1px #ddd;
   border-radius: 7px;
-  box-shadow: 10px 10px 20px rgba(161,204,165,0.5);
+  box-shadow: 5px 10px 15px rgba(161,204,165,0.2);
 }
 
 .place-image{
