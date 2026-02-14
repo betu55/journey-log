@@ -175,10 +175,12 @@
 
 .place-card{
   width: 100%;
+  height: fit-content;
   margin: 0;
   position: relative;
   border: solid 1px #ddd;
   border-radius: 7px;
+  box-shadow: 10px 10px 20px rgba(161,204,165,0.5);
 }
 
 .place-image{
@@ -209,8 +211,12 @@
 .place-name{
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 0;
+  margin: 0.5rem 1rem 0.5rem 0;
   padding: 0;
+}
+
+.place-rating{
+  display: block;
 }
 
 .place-location {
@@ -247,6 +253,8 @@
 }
 
 .stars{
+  width: max-content;
+  display: inline-block;
   color: #A1CCA5;
 }
 

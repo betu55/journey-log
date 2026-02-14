@@ -27,21 +27,147 @@
     "imageUrl": "https://images.unsplash.com/photo-1514565131-fce0801e5785?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxuZXclMjB5b3JrJTIwY2l0eSUyMHNreWxpbmV8ZW58MXx8fHwxNzcwMTEyMDE4fDA&ixlib=rb-4.1.0&q=80&w=1080"
   },
   {
-    "location": "Addis Ababa, Ethiopia",
-    "placeName": "6 Kilo",
-    "dateVisited": "2026-02-02",
-    "description": "Cool place",
-    "rating": 5,
-    "imageUrl": "/images/default-Image.jpg",
-    "id": "5"
-  },
-  {
     "location": "Toronto, Canada",
     "placeName": "CN Tower",
     "dateVisited": "2026-02-09",
-    "description": "The CN Tower in Toronto (553m) is a premier, iconic Canadian landmark featuring breathtaking views, a revolving restaurant, and the thrilling EdgeWalk. Located downtown, it is surrounded by attractions like Ripley’s Aquarium. Other major Canadian sites include Niagara Falls, Banff National Park, and Parliament Hill. ",
+    "description": "I went to the CN Tower in downtown Toronto and the view from up there honestly surprised me. We grabbed food at the revolving restaurant and watched the city slowly spin beneath us, which felt unreal. I didn’t do the EdgeWalk, but just seeing people stepping out over the edge was enough to make my palms sweat. Afterward we walked around nearby spots like Ripley’s Aquarium and made a whole afternoon out of it.",
     "rating": 3,
     "imageUrl": "https://images.unsplash.com/photo-1509118796018-30cc4ce216f1?q=80&w=1285&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "id": "6"
-  }
+  },
+  {
+    "id": "4",
+    "placeName": "Santorini Cliff Walk",
+    "location": "Oia, Greece",
+    "dateVisited": "2025-07-05",
+    "description": "Went here with my cousins and we basically lived on iced coffee. The views are unreal, but the stairs are not a joke. I loved the sunsets, but the crowds made it feel like a theme park at times. Still worth it if you go early in the morning.",
+    "rating": 4,
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVs9yJp1vBvtNlpbe7DbnAuIk4KcJdTRUZw&s"
+  },
+  {
+    "id": "5",
+    "placeName": "Banff Lake Louise",
+    "location": "Banff National Park, Canada",
+    "dateVisited": "2024-08-18",
+    "description": "My family took a road trip here and I remember just staring at the water like it was edited in real life. We stayed a few days and did short hikes because my mom refused anything “steep.” Cold air, warm snacks, perfect combo. Easily one of my favorite places in Canada.",
+    "rating": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1618223937062-262280e9fb39?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": "7",
+    "placeName": "Niagara Falls",
+    "location": "Ontario, Canada",
+    "dateVisited": "2023-07-29",
+    "description": "Went as a kid with my parents and got absolutely soaked, even with a poncho. The falls are crazy loud and honestly pretty amazing. The tourist area is a little cheesy, but the actual view makes up for it. Bonus points for funnel cake.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1463695970743-ae65cca05743?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TmlhZ3JhJTIwZmFsbHN8ZW58MHx8MHx8fDA%3D"
+  },
+  {
+    "id": "8",
+    "placeName": "Grand Canyon South Rim",
+    "location": "Arizona, USA",
+    "dateVisited": "2024-05-12",
+    "description": "I thought it was going to be “just a big hole,” but it genuinely stunned me. We went with family friends and took a million photos that still don’t do it justice. The wind was wild, and my little cousin kept pretending he was an eagle. Super memorable.",
+    "rating": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1691929925627-8b6db69e2813?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Z3JhbmQlMjBjYW55b24lMjBzb3V0aCUyMHJpbXxlbnwwfHwwfHx8Mg%3D%3D"
+  },
+  {
+    "id": "9",
+    "placeName": "The Colosseum",
+    "location": "Rome, Italy",
+    "dateVisited": "2025-03-21",
+    "description": "Went on a school trip and the history is incredible. The only downside is it felt a bit rushed and crowded, like everyone was speed-running the same photo. Still, standing inside it is one of those “wow this is real” moments.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1699012462295-bace478f27bc?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8VGhlJTIwQ29sb3NzZXVtfGVufDB8fDB8fHwy"
+  },
+  {
+    "id": "10",
+    "placeName": "Marrakech Medina",
+    "location": "Marrakech, Morocco",
+    "dateVisited": "2024-10-02",
+    "description": "The colors, the smells, the noise, everything is intense in the best way. I went with my aunt and we got lost like five times but kept finding cool little stalls. One shopkeeper taught me how to say thank you properly and laughed at my accent. I loved it.",
+    "rating": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1596750320291-a082a23dcc19?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8TWFycmFrZWNoJTIwTWVkaW5hfGVufDB8fDB8fHwy"
+  },
+  {
+    "id": "11",
+    "placeName": "Venice Gondola Area",
+    "location": "Venice, Italy",
+    "dateVisited": "2025-04-02",
+    "description": "I was so excited for Venice, but the gondola ride felt overpriced for what it was. It was pretty, but it also smelled weird in some spots and the crowds were nonstop. I’m glad I went once, but I don’t think I’d do the tourist gondola again.",
+    "rating": 2,
+    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUEViqqnGlDKh6LTxZIkkt60t30GA8iyCIAQ&s"
+  },
+  {
+    "id": "12",
+    "placeName": "Universal CityWalk Evening",
+    "location": "Los Angeles, USA",
+    "dateVisited": "2023-11-18",
+    "description": "Went with friends and thought it would be super fun, but it was basically crowded lines and expensive snacks. The vibe was loud, and we couldn’t find anywhere to sit for a while. The lights were cool though, and the people-watching was top tier.",
+    "rating": 3,
+    "imageUrl": "https://www.orlandoattractions.com/2019/wp-content/uploads/2012/04/IOAcitywalk.jpg"
+  },
+  {
+    "id": "13",
+    "placeName": "Petra Treasury Viewpoint",
+    "location": "Petra, Jordan",
+    "dateVisited": "2024-03-09",
+    "description": "This place felt like stepping into a movie scene. I went with my family and we started early, so the walk was peaceful at first. Seeing the Treasury appear between the rocks is honestly magical. I was tired, dusty, and still smiling the whole time.",
+    "rating": 5,
+    "imageUrl": "https://www.viajordan.com/wp-content/uploads/2023/04/Petra-Via-Jordan-Travel-3.jpg"
+  },
+  {
+    "id": "14",
+    "placeName": "Golden Gate Bridge Lookout",
+    "location": "San Francisco, USA",
+    "dateVisited": "2024-06-30",
+    "description": "I went with my friend and it was so foggy we could barely see the bridge at first. Then the fog lifted for like ten minutes and everyone started taking photos like it was a rare event (it was). Windy, cold, but kind of hilarious and iconic.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1533106638220-0c3fa497cbff?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8R29sZGVuJTIwR2F0ZSUyMEJyaWRnZSUyMExvb2tvdXR8ZW58MHx8MHx8fDI%3D"
+  },
+  {
+    "id": "15",
+    "placeName": "Dubai Mall Aquarium",
+    "location": "Dubai, UAE",
+    "dateVisited": "2025-01-06",
+    "description": "My little brother begged to go and honestly it was pretty cool. The aquarium wall is massive and you can just stand there watching sharks like it’s normal. It’s also super busy and kind of overwhelming, but if you like sea life it’s worth a stop.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1635756962089-ee9e9cfd284c?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZHViYWklMjBtYWxsJTIwYXF1YXJpdW18ZW58MHx8MHx8fDI%3D"
+  },
+  {
+    "id": "16",
+    "placeName": "Hollywood Walk of Fame",
+    "location": "Los Angeles, USA",
+    "dateVisited": "2023-11-20",
+    "description": "Not gonna lie, this was disappointing. I thought it would feel glamorous, but it was crowded and kind of dirty in some areas. We took a few quick pictures and left. My friend said, “We came, we saw, we escaped.”",
+    "rating": 1,
+    "imageUrl": "https://images.unsplash.com/photo-1621534893852-355409fccaee?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8SG9sbHl3b29kJTIwV2FsayUyMG9mJTIwRmFtZXxlbnwwfHwwfHx8Mg%3D%3D"
+  },
+  {
+    "id": "17",
+    "placeName": "Blue Lagoon",
+    "location": "Grindavík, Iceland",
+    "dateVisited": "2024-02-14",
+    "description": "Went here in winter and it felt unreal being warm in the water while the air was freezing. I went with my partner and we stayed way too long because it was so relaxing. The silica mud was fun, but I did feel like a shiny dumpling afterward.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1415226556993-1404e0c6e727?q=80&w=1359&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": "23",
+    "placeName": "Shibuya Crossing",
+    "location": "Shibuya, Tokyo, Japan",
+    "dateVisited": "2025-09-24",
+    "description": "I went here with a couple friends after dinner and we just stood there watching the crowd like it was a live show. Crossing all at once felt chaotic but weirdly fun, and we ended up doing it like five times for no reason. Then we grabbed snacks from a convenience store and people-watched until late.",
+    "rating": 5,
+    "imageUrl": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1080&q=80"
+  },
+  {
+    "id": "24",
+    "placeName": "Louvre Museum",
+    "location": "Paris, France",
+    "dateVisited": "2025-06-16",
+    "description": "I went here right after visiting the Eiffel Tower and it was a completely different vibe. The art is incredible, but it’s also super crowded and overwhelming. I loved seeing the Mona Lisa in person, but I felt like I needed a map just to find my way around.",
+    "rating": 4,
+    "imageUrl": "https://images.unsplash.com/photo-1567942585146-33d62b775db0?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bG91dnJlJTIwbXVzZXVtfGVufDB8fDB8fHwy"
+  }  
 ]
