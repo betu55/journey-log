@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import PlaceCard from "../components/PlaceCard";
+import SearchBar from "../components/SearchBar";
 
 function Home() {
   const [places, setPlaces] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -21,11 +23,14 @@ function Home() {
 
   useEffect(() => {
     async function fetchPlaces() {
+      setLoading(true);
+      setError(null);
       try {
-        const res = await fetch("http://localhost:8080/api/places");
-        if (!res.ok) {
-          throw new Error("Failed to fetch places");
+         let url = "http://localhost:8080/api/places"; // Initial fetch
+        if (searchQuery.trim() !== "") {
+          url += `/search?placeName=${encodeURIComponent(searchQuery)}`; //Query fetch
         }
+        const res = await fetch(url);
         const body = await res.json();
         setPlaces(body.data || []);
       } catch (err) {
@@ -36,11 +41,14 @@ function Home() {
     }
 
     fetchPlaces();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <div className="page">
-      <h1>Home Page</h1>
+      <div className="page-header">
+        <h1>Home Page</h1>
+        <SearchBar placeName={searchQuery} setPlaceName={setSearchQuery} />
+      </div>
 
       {loading && <p>Loading places...</p>}
       {error && <p>{error}</p>}
@@ -48,7 +56,7 @@ function Home() {
       {!loading && !error && (
         <div className="place-list">
           {places.length === 0 ? (
-            <p>No places yet. Add one to get started.</p>
+            <p>Add more places to see them here.</p>
           ) : (
             places.map((place) => (
               <PlaceCard

@@ -1,6 +1,9 @@
 import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Error404() {
+    const navigate = useNavigate();
+
     return (
         <div className='page container'>
             <p className="error-404">404</p>
@@ -8,7 +11,7 @@ function Error404() {
             <Button
             variant="secondary"
             width="auto"
-            onClick={() => console.log("Go Home clicked")}
+            onClick={() => navigate('/')}
             >
             Go To Home
             </Button>

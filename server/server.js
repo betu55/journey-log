@@ -14,13 +14,26 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // GET all places
 app.get("/api/places", (req, res) => {
+  res.status(200).json({success: true, data: places}); // returns empty collection even if no places
+});
 
-  if (places.length > 0) {
-    res.status(200).json({success: true, data: places});
-  } else{
-    res.status(404).json({ error: "No places found" });
-  }
+// GET search a place
+app.get('/api/places/search', (req, res) =>{
+    const name = req.query.placeName;
 
+    if(!name){
+        return res.status(400).json({error: "Place Name is Required"});
+    }
+    const regex = new RegExp(name, "i");
+
+    const filteredPlaces = places.filter(place => regex.test(place.placeName));
+
+    if(filteredPlaces.length > 0){
+        res.status(200).json({success: true, data: filteredPlaces});
+    }
+    else{
+        res.status(404).json({error: "No Matching Places Found"});
+    }
 });
 
 // POST/Create a new place
