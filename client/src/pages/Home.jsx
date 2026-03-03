@@ -61,12 +61,12 @@ function Home() {
             places.map((place) => (
               <PlaceCard
                 key={place.id}
-                placeName={place.placeName}
-                location={place.location}
-                dateVisited={place.dateVisited}
-                description={place.description}
+                placeName={place.placeName?.trim()}
+                location={place.location?.trim()}
+                dateVisited={place.dateVisited?.split("T")[0]}
+                description={place.description?.trim()}
                 rating={place.rating}
-                imageUrl={place.imageUrl}
+                imageUrl={place.imageUrl?.trim() || "/images/default-Image.jpg"}
                 onDelete={() => handleDelete(place)}
               />
             ))
