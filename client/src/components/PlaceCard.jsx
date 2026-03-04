@@ -1,12 +1,12 @@
 import Button from "./Button";
-import { FaTrash, FaMapMarkerAlt, FaRegCalendarAlt, FaStar, FaRegStar  } from "react-icons/fa";
+import { FaTrash, FaMapMarkerAlt, FaRegCalendarAlt, FaStar, FaRegStar } from "react-icons/fa";
 
-function Stars({value}){
-  return(
+function Stars({ value }) {
+  return (
     <span className="stars">
-      {
-        [1,2,3,4,5].map(i => i <= value? <FaStar key={i}/> : <FaRegStar key={i} />)
-      }
+      {[1, 2, 3, 4, 5].map((i) =>
+        i <= value ? <FaStar key={i} /> : <FaRegStar key={i} />
+      )}
     </span>
   );
 }
@@ -19,9 +19,10 @@ function PlaceCard({
   rating,
   imageUrl,
   onDelete,
+  onDoubleClick, 
 }) {
   return (
-    <div className="place-card">
+    <div className="place-card" onDoubleClick={onDoubleClick}> 
       {onDelete && (
         <div className="place-card__action">
           <Button variant="danger-light" width="fit" onClick={onDelete}>
