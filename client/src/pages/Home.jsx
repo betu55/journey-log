@@ -2,33 +2,76 @@ import { useEffect, useState } from "react";
 import PlaceCard from "../components/PlaceCard";
 import SearchBar from "../components/SearchBar";
 
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+let DefaultIcon = L.icon({
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41]
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+
+function RecenterMap({ coords }) {
+  const map = useMap();
+  useEffect(() => {
+    if (coords) map.setView(coords, 13);
+  }, [coords, map]);
+  return null;
+}
+
 function Home() {
   const [places, setPlaces] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null); 
+  const [mapCoords, setMapCoords] = useState([51.505, -0.09]);
 
-  async function handleDelete(place){
-    try{
+  useEffect(() => {
+    if (selectedPlace && selectedPlace.location) {
+      const fetchCoords = async () => {
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(selectedPlace.location)}`
+          );
+          const data = await response.json();
+          if (data && data.length > 0) {
+            setMapCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+          }
+        } catch (err) {
+          console.error("Geocoding error:", err);
+        }
+      };
+      fetchCoords();
+    }
+  }, [selectedPlace]);
+
+  async function handleDelete(place) {
+    if (!window.confirm(`Delete ${place.placeName}?`)) return;
+    try {
       const res = await fetch(`http://localhost:8080/api/places/placeName/${encodeURIComponent(place.placeName)}`, {
         method: "DELETE"
       });
-      if(!res.ok) throw new Error("Failed to delete place");
+      if (!res.ok) throw new Error("Failed to delete place");
       setPlaces((prev) => prev.filter((p) => p.id !== place.id));
-    }catch(err){
-      console.error(err);
-      alert("Error deleting place. Try again.");
+      if (selectedPlace?.id === place.id) setSelectedPlace(null);
+    } catch (err) {
+      alert("Error deleting place.");
     }
   }
 
   useEffect(() => {
     async function fetchPlaces() {
       setLoading(true);
-      setError(null);
       try {
-         let url = "http://localhost:8080/api/places"; // Initial fetch
+        let url = "http://localhost:8080/api/places"; 
         if (searchQuery.trim() !== "") {
-          url += `/search?placeName=${encodeURIComponent(searchQuery)}`; //Query fetch
+          url += `/search?placeName=${encodeURIComponent(searchQuery)}`;
         }
         const res = await fetch(url);
         const body = await res.json();
@@ -39,7 +82,6 @@ function Home() {
         setLoading(false);
       }
     }
-
     fetchPlaces();
   }, [searchQuery]);
 
@@ -56,21 +98,45 @@ function Home() {
       {!loading && !error && (
         <div className="place-list">
           {places.length === 0 ? (
-            <p>Add more places to see them here.</p>
+            <p>No places found.</p>
           ) : (
             places.map((place) => (
               <PlaceCard
                 key={place.id}
-                placeName={place.placeName?.trim()}
-                location={place.location?.trim()}
+                {...place}
                 dateVisited={place.dateVisited?.split("T")[0]}
-                description={place.description?.trim()}
-                rating={place.rating}
-                imageUrl={place.imageUrl?.trim() || "/images/default-Image.jpg"}
+                imageUrl={place.imageUrl || "/images/default-Image.jpg"}
                 onDelete={() => handleDelete(place)}
+                onDoubleClick={() => setSelectedPlace(place)} 
               />
             ))
           )}
+        </div>
+      )}
+
+      {selectedPlace && (
+        <div className="modal-overlay" onClick={() => setSelectedPlace(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setSelectedPlace(null)}>&times;</button>
+            
+            <img src={selectedPlace.imageUrl} alt={selectedPlace.placeName} className="modal-img-full" />
+
+            <div className="modal-body">
+              <h2>{selectedPlace.placeName}</h2>
+              <p><strong>Location:</strong> {selectedPlace.location}</p>
+              <p>{selectedPlace.description}</p>
+              
+              <div className="modal-map-wrap">
+                <MapContainer center={mapCoords} zoom={13} style={{ height: "250px", width: "100%" }}>
+                  <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                  <Marker position={mapCoords}>
+                    <Popup>{selectedPlace.placeName}</Popup>
+                  </Marker>
+                  <RecenterMap coords={mapCoords} />
+                </MapContainer>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
