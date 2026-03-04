@@ -68,6 +68,37 @@ app.get("/api/places", async (req, res) => {
   }
 });
 
+//GET one place
+app.get("/api/places/placeName/:placeName", async (req, res) =>{
+  try{
+    const name = req.params.placeName;
+
+    const place = await Place.findOne({
+      placeName: { $regex: `^${name}$`, $options: "i" }
+    });
+    
+    if (place){
+      res.status(200).json({ 
+        success: true,
+        data: place
+      });
+    } else {
+      res.status(404).json({
+        success: false, 
+        error: "Place Not Found"
+      });
+    }
+
+  } catch (error){
+    
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+
+  }
+});
+
 // GET search a place
 app.get('/api/places/search', async (req, res) =>{
   try{
@@ -175,7 +206,10 @@ app.delete("/api/places/placeName/:placeName", async (req, res) =>{
         message: "Place Deleted Successfully" 
       });
     } else {
-      res.status(404).json({error: "Place Not Found"});
+      res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
     }
 
   } catch (error){
