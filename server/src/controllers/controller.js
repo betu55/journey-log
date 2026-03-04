@@ -1,0 +1,179 @@
+const service = require("../services/service");
+
+// Controller functions for handling API requests related to places
+
+// Get all places
+async function getAllPlaces(req, res){
+  try{ 
+    const places = await service.getAllPlaces();
+    return res.status(200).json({
+      success: true,
+      data: places
+    });
+  } catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+// Get one place by name
+async function getOneByPlaceName(req, res){
+  try{
+    const name = req.params.placeName;
+    const place = await service.getOneByPlaceName(name);
+
+    if(!place){
+      return res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: place
+    });
+
+  } catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+// Search places by name
+async function searchByPlaceName(req, res){
+  try{
+    const name = req.query.placeName;
+    
+    if(!name){
+      return res.status(400).json({
+        success: false,
+        error: "Place Name is Required"
+      });
+    }
+
+    const places = await service.searchByPlaceName(name);
+
+    return res.status(200).json({
+      success: true,
+      data: places
+    });
+  }catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+// Create a new place
+async function createPlace(req, res){
+  try{
+    const placeData = req.body;
+    const newPlace = await service.createPlace(placeData);
+
+    return res.status(201).json({
+      success: true,
+      data: newPlace
+    });
+  }catch(err){
+    if (err.status === 400) {
+      return res.status(400).json({
+        success: false,
+        error: err.message
+      });
+    }
+    if(err.name === "ValidationError"){
+      return res.status(400).json({
+        success: false,
+        message: "Improper Data Format",
+        error: err.message
+      });
+    }
+    if(err.code === 11000){
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate Place",
+        error: err.message
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+// delete place by name
+async function deleteByPlaceName(req, res){
+  try{
+    const deletedPlace = await service.deleteByPlaceName(req.params.placeName);
+    if(!deletedPlace){
+      return res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Place Deleted Successfully"
+    });
+  }catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+// update place by name
+async function updateByPlaceName(req, res){
+  try{
+    const placeName = req.params.placeName;
+    const updateData = req.body;
+    const updatedPlace = await service.updateByPlaceName(placeName, updateData);
+    if (!updatedPlace){
+      return res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: updatedPlace
+    });
+  }catch(err){
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: "Improper Data Format",
+        error: err.message
+      });
+    }
+    if (err.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate Place",
+        error: err.message
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+
+  }
+}
+
+module.exports = {
+  getAllPlaces,
+  getOneByPlaceName,
+  searchByPlaceName,
+  createPlace,
+  deleteByPlaceName,
+  updateByPlaceName
+}
