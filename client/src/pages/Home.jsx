@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import PlaceCard from "../components/PlaceCard";
 import SearchBar from "../components/SearchBar";
-
+import Button from "../components/Button";
+import { FaTimes } from "react-icons/fa";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
 let DefaultIcon = L.icon({
     iconUrl: markerIcon,
     shadowUrl: markerShadow,
@@ -44,7 +46,7 @@ function Home() {
             setMapCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
           }
         } catch (err) {
-          console.error("Geocoding error:", err);
+          console.error(err);
         }
       };
       fetchCoords();
@@ -117,7 +119,11 @@ function Home() {
       {selectedPlace && (
         <div className="modal-overlay" onClick={() => setSelectedPlace(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setSelectedPlace(null)}>&times;</button>
+            <div className="modal-close-wrapper">
+              <Button variant="danger-light" width="fit" onClick={() => setSelectedPlace(null)}>
+                <FaTimes />
+              </Button>
+            </div>
             
             <img src={selectedPlace.imageUrl} alt={selectedPlace.placeName} className="modal-img-full" />
 
