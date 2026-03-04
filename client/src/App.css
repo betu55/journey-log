@@ -537,3 +537,16 @@
   transform: scale(1.2);
   color: #EB5f59; 
 }
+
+/* Edit button style */
+.btn-edit-light {
+  background: transparent;
+  color: #888;
+  border-color: #ddd;
+}
+
+.btn-edit-light:hover {
+  background: #e0e0e0;
+  color: #333;
+  border-color: #ccc;
+}

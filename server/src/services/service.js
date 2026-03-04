@@ -49,11 +49,24 @@ async function updateByPlaceName(placeName, updateData){
   );
 }
 
+async function deleteById(id){
+  return Place.findByIdAndDelete(id);
+}
+
+async function updateById(id, updateData){
+  return Place.findByIdAndUpdate(
+    id,
+    { $set: updateData },
+    { new: true, runValidators: true }
+  );
+}
 module.exports = {
   getAllPlaces,
   getOneByPlaceName,
   searchByPlaceName,
   createPlace,
   deleteByPlaceName,
-  updateByPlaceName
+  updateByPlaceName,
+  deleteById,
+  updateById
 };

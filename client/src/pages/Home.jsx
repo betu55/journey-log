@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PlaceCard from "../components/PlaceCard";
 import SearchBar from "../components/SearchBar";
-
+import Button from "../components/Button";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -29,7 +29,8 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null); 
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [editingPlace, setEditingPlace] = useState(null);
   const [mapCoords, setMapCoords] = useState([51.505, -0.09]);
 
   useEffect(() => {
@@ -54,14 +55,42 @@ function Home() {
   async function handleDelete(place) {
     if (!window.confirm(`Delete ${place.placeName}?`)) return;
     try {
-      const res = await fetch(`http://localhost:8080/api/places/placeName/${encodeURIComponent(place.placeName)}`, {
-        method: "DELETE"
-      });
+      const res = await fetch(
+      `http://localhost:8080/api/places/${place._id}`,
+      { method: "DELETE" }
+      );
       if (!res.ok) throw new Error("Failed to delete place");
-      setPlaces((prev) => prev.filter((p) => p.id !== place.id));
-      if (selectedPlace?.id === place.id) setSelectedPlace(null);
+      setPlaces(prev => prev.filter(p => p._id !== place._id));
+     if (selectedPlace?._id === place._id) setSelectedPlace(null);
     } catch (err) {
       alert("Error deleting place.");
+    }
+  }
+
+  async function handleUpdate(e) {
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/places/${editingPlace._id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(editingPlace)
+      }
+    );
+      if (!res.ok) throw new Error("Failed to update place");
+
+      const updated = await res.json();
+
+      setPlaces((prev) =>
+        prev.map((p) =>
+        p._id === editingPlace._id ? updated.data : p
+        )
+      );
+
+      setEditingPlace(null);
+    } catch (err) {
+      alert("Error updating place.");
     }
   }
 
@@ -69,7 +98,7 @@ function Home() {
     async function fetchPlaces() {
       setLoading(true);
       try {
-        let url = "http://localhost:8080/api/places"; 
+        let url = "http://localhost:8080/api/places";
         if (searchQuery.trim() !== "") {
           url += `/search?placeName=${encodeURIComponent(searchQuery)}`;
         }
@@ -102,15 +131,96 @@ function Home() {
           ) : (
             places.map((place) => (
               <PlaceCard
-                key={place.id}
+                key={place._id}
                 {...place}
                 dateVisited={place.dateVisited?.split("T")[0]}
                 imageUrl={place.imageUrl || "/images/default-Image.jpg"}
                 onDelete={() => handleDelete(place)}
-                onDoubleClick={() => setSelectedPlace(place)} 
+                onEdit={() => setEditingPlace(place)}
+                onDoubleClick={() => setSelectedPlace(place)}
               />
             ))
           )}
+        </div>
+      )}
+
+      {editingPlace && (
+        <div className="modal-overlay" onClick={() => setEditingPlace(null)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setEditingPlace(null)}>
+              &times;
+            </button>
+
+            <form onSubmit={handleUpdate} className="add-form">
+              <h2>Edit Place</h2>
+
+              <div className="form-group">
+                <label>Place Name</label>
+                <input
+                  type="text"
+                  value={editingPlace.placeName}
+                  onChange={(e) =>
+                    setEditingPlace({ ...editingPlace, placeName: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Location</label>
+                <input
+                  type="text"
+                  value={editingPlace.location}
+                  onChange={(e) =>
+                    setEditingPlace({ ...editingPlace, location: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Date Visited</label>
+                <input
+                  type="date"
+                  value={editingPlace.dateVisited?.split("T")[0]}
+                  onChange={(e) =>
+                    setEditingPlace({ ...editingPlace, dateVisited: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Description</label>
+                <textarea
+                  rows="4"
+                  value={editingPlace.description}
+                  onChange={(e) =>
+                    setEditingPlace({ ...editingPlace, description: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Rating (1–5)</label>
+                <input
+                  type="number"
+                  min="1"
+                  max="5"
+                  value={editingPlace.rating}
+                  onChange={(e) =>
+                    setEditingPlace({ ...editingPlace, rating: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <Button type="submit" variant="primary" width="fit">
+                Update Place
+              </Button>
+            </form>
+          </div>
         </div>
       )}
 
