@@ -45,7 +45,7 @@ async function updateByPlaceName(placeName, updateData){
   return Place.findOneAndUpdate(
     {placeName: { $regex: `^${placeName}$`, $options: "i" }},
     {$set: updateData},
-    {new: true, runValidators: true}
+    {returnDocument: "after", runValidators: true}
   );
 }
 
@@ -57,7 +57,7 @@ async function updateById(id, updateData){
   return Place.findByIdAndUpdate(
     id,
     { $set: updateData },
-    { new: true, runValidators: true }
+    { returnDocument: "after", runValidators: true }
   );
 }
 module.exports = {

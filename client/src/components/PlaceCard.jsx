@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { FaTrash, FaMapMarkerAlt, FaRegCalendarAlt, FaStar, FaRegStar, FaEdit } from "react-icons/fa";
+import { FaTrash, FaMapMarkerAlt, FaRegCalendarAlt, FaStar, FaRegStar, FaPen } from "react-icons/fa";
 
 function Stars({ value }) {
   return (
@@ -28,11 +28,11 @@ function PlaceCard({
         <div className="place-card__action">
           {onEdit && (
             <Button variant="edit-light" width="fit" onClick={onEdit}>
-              <FaEdit size={12} />
+              <FaPen size={12} />
             </Button>
           )}
           {onDelete && (
-            <Button variant="danger-light" width="fit" onClick={onEdit}>
+            <Button variant="danger-light" width="fit" onClick={onDelete}>
               <FaTrash size={12} />
             </Button>
           )}

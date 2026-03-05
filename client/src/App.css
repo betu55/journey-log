@@ -250,6 +250,7 @@
   width: 30px;
   height: 30px;
   padding: 0;
+  margin-left: 0;
 }
 
 .stars{
@@ -360,6 +361,8 @@
 .btn-danger:hover { background: #d14b44; color: #fff; border-color: transparent;}
 .btn-danger-light { background: transparent; color: #888; border-color: #ddd; }
 .btn-danger-light:hover { background: #EB5f59; color: #fff; border-color: transparent;}
+.btn-edit-light { background: transparent; color: #888; border-color: #ddd; }
+.btn-edit-light:hover { background: #A1CCA5; color: #fff; border-color: transparent;}
 
 .btn-auto { width: auto; }
 .btn-full { width: 100%; }
@@ -545,17 +548,4 @@
 .modal-close:hover {
   transform: scale(1.2);
   color: #EB5f59; 
-}
-
-/* Edit button style */
-.btn-edit-light {
-  background: transparent;
-  color: #888;
-  border-color: #ddd;
-}
-
-.btn-edit-light:hover {
-  background: #e0e0e0;
-  color: #333;
-  border-color: #ccc;
 }
