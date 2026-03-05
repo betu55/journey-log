@@ -123,6 +123,8 @@
   font-size: 0.9rem;
   margin: 1rem;
   cursor: pointer;
+  transition: color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .add-form{
@@ -242,7 +244,7 @@
 .place-card__action {
   position: absolute;
   bottom: 0px;
-  right: 0.5rem;
+  right: 1rem;
   z-index: 1;
 }
 
@@ -251,6 +253,7 @@
   height: 30px;
   padding: 0;
   margin-left: 0;
+  margin-right: 4px;
 }
 
 .stars{
