@@ -524,5 +524,38 @@
   height: 250px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
+}
+
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 35px;
+  line-height: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  z-index: 100;
+  transition: transform 0.2s;
+}
+
+.modal-close:hover {
+  transform: scale(1.2);
+  color: #EB5f59; 
+}
+
+/* Edit button style */
+.btn-edit-light {
+  background: transparent;
+  color: #888;
+  border-color: #ddd;
+}
+
+.btn-edit-light:hover {
+  background: #e0e0e0;
+  color: #333;
+  border-color: #ccc;
 }

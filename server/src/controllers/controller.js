@@ -168,6 +168,61 @@ async function updateByPlaceName(req, res){
 
   }
 }
+async function deleteById(req, res){
+  try{
+    const deletedPlace = await service.deleteById(req.params.id);
+    if(!deletedPlace){
+      return res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Place Deleted Successfully"
+    });
+  }catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+async function updateById(req, res){
+  try{
+    const updatedPlace = await service.updateById(req.params.id, req.body);
+    if(!updatedPlace){
+      return res.status(404).json({
+        success: false,
+        error: "Place Not Found"
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: updatedPlace
+    });
+  }catch(err){
+    if (err.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: "Improper Data Format",
+        error: err.message
+      });
+    }
+    if (err.code === 11000) {
+      return res.status(409).json({
+        success: false,
+        message: "Duplicate Place",
+        error: err.message
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
 
 module.exports = {
   getAllPlaces,
@@ -175,5 +230,7 @@ module.exports = {
   searchByPlaceName,
   createPlace,
   deleteByPlaceName,
-  updateByPlaceName
+  updateByPlaceName,
+  deleteById,
+  updateById
 }
