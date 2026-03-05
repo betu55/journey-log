@@ -20,19 +20,33 @@ function PlaceCard({
   imageUrl,
   onDelete,
   onEdit,
-  onDoubleClick,
+  onClick,
 }) {
   return (
-    <div className="place-card" onDoubleClick={onDoubleClick}>
+    <div className="place-card" onClick={onClick}>
       {(onDelete || onEdit) && (
         <div className="place-card__action">
           {onEdit && (
-            <Button variant="edit-light" width="fit" onClick={onEdit}>
+            <Button
+              variant="edit-light"
+              width="fit"
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit();
+              }}
+            >
               <FaPen size={12} />
             </Button>
           )}
           {onDelete && (
-            <Button variant="danger-light" width="fit" onClick={onDelete}>
+            <Button
+              variant="danger-light"
+              width="fit"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+            >
               <FaTrash size={12} />
             </Button>
           )}
