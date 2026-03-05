@@ -139,7 +139,7 @@ function Home() {
                 imageUrl={place.imageUrl || "/images/default-Image.jpg"}
                 onDelete={() => handleDelete(place)}
                 onEdit={() => setEditingPlace(place)}
-                onDoubleClick={() => setSelectedPlace(place)}
+                onClick={() => setSelectedPlace(place)}
               />
             ))
           )}
@@ -148,21 +148,31 @@ function Home() {
 
       {editingPlace && (
         <div className="modal-overlay" onClick={() => setEditingPlace(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setEditingPlace(null)}>
-              &times;
-            </button>
-
+          <div
+            className="edit-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <form onSubmit={handleUpdate} className="add-form">
-              <h2>Edit Place</h2>
-
+              <div className="form-header">
+                <h2>Edit Place</h2>
+                <Button
+                  variant="danger-light"
+                  width="fit"
+                  onClick={() => setEditingPlace(null)}
+                >
+                  <FaTimes size={14} />
+                </Button>
+              </div>
               <div className="form-group">
                 <label>Place Name</label>
                 <input
                   type="text"
                   value={editingPlace.placeName}
                   onChange={(e) =>
-                    setEditingPlace({ ...editingPlace, placeName: e.target.value })
+                    setEditingPlace({
+                      ...editingPlace,
+                      placeName: e.target.value,
+                    })
                   }
                   required
                 />
@@ -174,7 +184,10 @@ function Home() {
                   type="text"
                   value={editingPlace.location}
                   onChange={(e) =>
-                    setEditingPlace({ ...editingPlace, location: e.target.value })
+                    setEditingPlace({
+                      ...editingPlace,
+                      location: e.target.value,
+                    })
                   }
                   required
                 />
@@ -186,7 +199,10 @@ function Home() {
                   type="date"
                   value={editingPlace.dateVisited?.split("T")[0]}
                   onChange={(e) =>
-                    setEditingPlace({ ...editingPlace, dateVisited: e.target.value })
+                    setEditingPlace({
+                      ...editingPlace,
+                      dateVisited: e.target.value,
+                    })
                   }
                   required
                 />
@@ -198,7 +214,10 @@ function Home() {
                   rows="4"
                   value={editingPlace.description}
                   onChange={(e) =>
-                    setEditingPlace({ ...editingPlace, description: e.target.value })
+                    setEditingPlace({
+                      ...editingPlace,
+                      description: e.target.value,
+                    })
                   }
                   required
                 />
@@ -230,20 +249,34 @@ function Home() {
         <div className="modal-overlay" onClick={() => setSelectedPlace(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-close-wrapper">
-              <Button variant="danger-light" width="fit" onClick={() => setSelectedPlace(null)}>
-                <FaTimes />
+              <Button
+                variant="danger-light"
+                width="fit"
+                onClick={() => setSelectedPlace(null)}
+              >
+                <FaTimes size={16}/>
               </Button>
             </div>
-            
-            <img src={selectedPlace.imageUrl} alt={selectedPlace.placeName} className="modal-img-full" />
+
+            <img
+              src={selectedPlace.imageUrl}
+              alt={selectedPlace.placeName}
+              className="modal-img-full"
+            />
 
             <div className="modal-body">
               <h2>{selectedPlace.placeName}</h2>
-              <p><strong>Location:</strong> {selectedPlace.location}</p>
+              <p>
+                <strong>Location:</strong> {selectedPlace.location}
+              </p>
               <p>{selectedPlace.description}</p>
-              
+
               <div className="modal-map-wrap">
-                <MapContainer center={mapCoords} zoom={13} style={{ height: "250px", width: "100%" }}>
+                <MapContainer
+                  center={mapCoords}
+                  zoom={13}
+                  style={{ height: "250px", width: "100%" }}
+                >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                   <Marker position={mapCoords}>
                     <Popup>{selectedPlace.placeName}</Popup>
