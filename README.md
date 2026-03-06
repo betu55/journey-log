@@ -48,6 +48,8 @@ In the future, Journey Log can be extended into an application with multi-user s
 
   - Modularized the backend for easier navigation and separation of logic. folders like: routes (purely managing the routes), services(where the backend logic for communicating and updating the DB lies), controllers(appropriate status codes and api calls are handled here).
 
+  - Made use of modals so that user can update or view a card by clicking on the card or pushing the edit button.
+
 3. Challenges
 
     Environment Configuration: We overcame persistent Git 403 Forbidden errors by migrating the workflow to a macOS environment.
