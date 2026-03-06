@@ -35,24 +35,24 @@ function Home() {
   const [editingPlace, setEditingPlace] = useState(null);
   const [mapCoords, setMapCoords] = useState([51.505, -0.09]);
 
-  useEffect(() => {
-    if (selectedPlace && selectedPlace.location) {
-      const fetchCoords = async () => {
-        try {
-          const response = await fetch(
-            `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(selectedPlace.location)}`
-          );
-          const data = await response.json();
-          if (data && data.length > 0) {
-            setMapCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
-          }
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      fetchCoords();
+  async function handleViewMap(place) {
+    setSelectedPlace(place);
+    
+    try {
+      const res = await fetch(`http://localhost:8080/api/places/coords?id=${place._id}`);
+
+      if (!res.ok) throw new Error("Failed to fetch coordinates");
+
+      const body = await res.json();
+
+      if (body?.data) {
+        const coords = [parseFloat(body.data.latitude), parseFloat(body.data.longitude)];
+        setMapCoords(coords);
+      }
+    } catch (err) {
+      alert("Error fetching coordinates:");
     }
-  }, [selectedPlace]);
+  }
 
   async function handleDelete(place) {
     if (!window.confirm(`Delete ${place.placeName}?`)) return;
@@ -139,7 +139,7 @@ function Home() {
                 imageUrl={place.imageUrl || "/images/default-Image.jpg"}
                 onDelete={() => handleDelete(place)}
                 onEdit={() => setEditingPlace(place)}
-                onClick={() => setSelectedPlace(place)}
+                onClick={() => handleViewMap(place)}
               />
             ))
           )}

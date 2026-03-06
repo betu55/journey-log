@@ -224,6 +224,33 @@ async function updateById(req, res){
   }
 }
 
+//API call to get location coords
+async function getCoordinates(req, res){
+  try{
+    const placeId = req.query.id;
+    
+    if (!placeId){
+      return res.status(400).json({
+        sucess: false,
+        error: "Place ID is Required"
+      });
+    }
+
+    const coords = await service.getCoordinates(placeId);
+
+    return res.status(200).json({
+      success: true,
+      data: coords
+    });
+
+  } catch{
+    return res.status(500).json({
+      success: false,
+      messages: "Server Error"
+    });
+  }
+}
+
 module.exports = {
   getAllPlaces,
   getOneByPlaceName,
@@ -232,5 +259,6 @@ module.exports = {
   deleteByPlaceName,
   updateByPlaceName,
   deleteById,
-  updateById
+  updateById,
+  getCoordinates
 }
