@@ -50,6 +50,14 @@ In the future, Journey Log can be extended into an application with multi-user s
 
   - Made use of modals so that user can update or view a card by clicking on the card or pushing the edit button.
 
+  - Expanded PlaceCard feature: When a place is clicked a popup appears with an expanded view of the log. This includes the pinned location of the place on an interactive map using leaflet.
+
+  - Location Coordinate lookup: The first time a PlaceCard is clicked and expanded, the backend calls nominatim openstreetmap api to fetch coordinates and saves the data to MongoDB for future use.
+
 3. Challenges
 
-    Environment Configuration: We overcame persistent Git 403 Forbidden errors by migrating the workflow to a macOS environment.
+  - Environment Configuration: We overcame persistent Git 403 Forbidden errors by migrating the workflow to a macOS environment.
+
+  - Challenges with installing MongoDB on older macOS environment, solved by migrating to Windows
+
+  - Backend codebase was beginning to grow longer and harder to maintain, solved by refactoring code to make it more modular. Seperated backend into controller, routes, services and initialization scripts.
