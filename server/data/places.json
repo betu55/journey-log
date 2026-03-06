@@ -30,7 +30,7 @@
     "location": "Toronto, Canada",
     "placeName": "CN Tower",
     "dateVisited": "2026-02-09",
-    "description": "I went to the CN Tower in downtown Toronto and the view from up there honestly surprised me. We grabbed food at the revolving restaurant and watched the city slowly spin beneath us, which felt unreal. I didn’t do the EdgeWalk, but just seeing people stepping out over the edge was enough to make my palms sweat. Afterward we walked around nearby spots like Ripley’s Aquarium and made a whole afternoon out of it.",
+    "description": "I went to the CN Tower in downtown Toronto, and the view from up there honestly surprised me. We grabbed food at the revolving restaurant and watched the city slowly spin beneath us, which felt unreal. I didn’t do the EdgeWalk, but just seeing people stepping out over the edge was enough to make my palms sweat. Afterward we walked around nearby spots like Ripley’s Aquarium and made a whole afternoon out of it.",
     "rating": 5,
     "imageUrl": "https://images.unsplash.com/photo-1509118796018-30cc4ce216f1?q=80&w=1285&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "id": "6"
@@ -40,7 +40,7 @@
     "placeName": "Santorini Cliff Walk",
     "location": "Oia, Greece",
     "dateVisited": "2025-07-05",
-    "description": "Went here with my cousins and we basically lived on iced coffee. The views are unreal, but the stairs are not a joke. I loved the sunsets, but the crowds made it feel like a theme park at times. Still worth it if you go early in the morning.",
+    "description": "Went here with my cousins, and we basically lived on iced coffee. The views are unreal, but the stairs are not a joke. I loved the sunsets, but the crowds made it feel like a theme park at times. Still worth it if you go early in the morning.",
     "rating": 4,
     "imageUrl": "https://images.unsplash.com/photo-1708693108811-79ec80c55ad1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
@@ -49,14 +49,14 @@
     "placeName": "Banff Lake Louise",
     "location": "Banff National Park, Canada",
     "dateVisited": "2024-08-18",
-    "description": "My family took a road trip here and I remember just staring at the water like it was edited in real life. We stayed a few days and did short hikes because my mom refused anything “steep.” Cold air, warm snacks, perfect combo. Easily one of my favorite places in Canada.",
+    "description": "My family took a road trip here, and I remember just staring at the water like it was edited in real life. We stayed a few days and did short hikes because my mom refused anything “steep.” Cold air, warm snacks, perfect combo. Easily one of my favorite places in Canada.",
     "rating": 5,
     "imageUrl": "https://images.unsplash.com/photo-1618223937062-262280e9fb39?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "id": "7",
     "placeName": "Niagara Falls",
-    "location": "Ontario, Canada",
+    "location": "Niagara Falls, Canada",
     "dateVisited": "2023-07-29",
     "description": "Went as a kid with my parents and got absolutely soaked, even with a poncho. The falls are crazy loud and honestly pretty amazing. The tourist area is a little cheesy, but the actual view makes up for it. Bonus points for funnel cake.",
     "rating": 4,
