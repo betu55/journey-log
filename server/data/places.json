@@ -5,7 +5,7 @@
     "location": "Paris, France",
     "dateVisited": "2025-06-15",
     "description": "Iconic iron lattice tower on the Champ de Mars. Stunning views of Paris from the top observation deck. Visited during sunset, absolutely breathtaking!",
-    "rating": 5,
+    "rating": 4,
     "imageUrl": "https://images.unsplash.com/photo-1720988583730-1191f37e5fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXJpcyUyMGVpZmZlbCUyMHRvd2VyJTIwbGFuZG1hcmt8ZW58MXx8fHwxNzcwMDM4NjE2fDA&ixlib=rb-4.1.0&q=80&w=1080"
   },
   {
@@ -14,7 +14,7 @@
     "location": "Tokyo, Japan",
     "dateVisited": "2025-09-22",
     "description": "Ancient Buddhist temple in Asakusa. Beautiful traditional architecture with the famous Kaminarimon gate. Great shopping street leading up to the temple.",
-    "rating": 5,
+    "rating": 4,
     "imageUrl": "https://images.unsplash.com/photo-1594311879147-c172ced24621?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0b2t5byUyMGphcGFuJTIwdGVtcGxlfGVufDF8fHx8MTc3MDEwODk3MXww&ixlib=rb-4.1.0&q=80&w=1080"
   },
   {
@@ -31,7 +31,7 @@
     "placeName": "CN Tower",
     "dateVisited": "2026-02-09",
     "description": "I went to the CN Tower in downtown Toronto and the view from up there honestly surprised me. We grabbed food at the revolving restaurant and watched the city slowly spin beneath us, which felt unreal. I didn’t do the EdgeWalk, but just seeing people stepping out over the edge was enough to make my palms sweat. Afterward we walked around nearby spots like Ripley’s Aquarium and made a whole afternoon out of it.",
-    "rating": 3,
+    "rating": 5,
     "imageUrl": "https://images.unsplash.com/photo-1509118796018-30cc4ce216f1?q=80&w=1285&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "id": "6"
   },
@@ -42,7 +42,7 @@
     "dateVisited": "2025-07-05",
     "description": "Went here with my cousins and we basically lived on iced coffee. The views are unreal, but the stairs are not a joke. I loved the sunsets, but the crowds made it feel like a theme park at times. Still worth it if you go early in the morning.",
     "rating": 4,
-    "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdVs9yJp1vBvtNlpbe7DbnAuIk4KcJdTRUZw&s"
+    "imageUrl": "https://images.unsplash.com/photo-1708693108811-79ec80c55ad1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "id": "5",
