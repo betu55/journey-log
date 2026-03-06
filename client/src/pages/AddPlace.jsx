@@ -50,6 +50,7 @@ function AddPlace() {
             <h1>Add New Journey</h1>
             <AddPlaceForm onSubmit={handleSubmit} className="add-form">
                 <div className="form-group">
+                    <br/>
                     <label>Location (City/Country) *</label>
                     <input 
                         name="location" 
@@ -115,5 +116,6 @@ function AddPlace() {
         </div>
     );
 }
+
 
 export default AddPlace;
