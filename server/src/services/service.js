@@ -31,7 +31,7 @@ async function createPlace(placeData){
     dateVisited: new Date(dateVisited),
     description,
     rating,
-    imageUrl : imageUrl || "/images/default-Image.jpg"
+    imageUrl : imageUrl || "/images/default-Image.jpg",
   });
 
   return newPlace.save();
@@ -60,6 +60,41 @@ async function updateById(id, updateData){
     { returnDocument: "after", runValidators: true }
   );
 }
+
+async function getCoordinates(placeId){
+  // Find place
+  const place = await Place.findById(placeId);
+  if(!place) throw new Error("Place Not Found");
+
+  // If coords exist return them
+  if(place.latitude != null && place.longitude != null){
+    return {latitude: place.latitude, longitude: place.longitude};
+  }
+
+  // if not get them from api
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place.location)}`,
+    { headers: { "User-Agent": "places-app" } } //header to prevent api access from being blocked
+  );
+
+  const data = await response.json();
+
+  if(!data || data.length === 0){
+    throw new Error("Unable to Find Coords")
+  };
+  
+  const latitude = parseFloat(data[0].lat);
+  const longitude = parseFloat(data[0].lon);
+
+  //Save coords in mongodb for future use to avoid repeated api calls
+  place.latitude = latitude;
+  place.longitude = longitude;
+  await place.save();
+
+  return {latitude, longitude};
+
+}
+
 module.exports = {
   getAllPlaces,
   getOneByPlaceName,
@@ -68,5 +103,6 @@ module.exports = {
   deleteByPlaceName,
   updateByPlaceName,
   deleteById,
-  updateById
+  updateById,
+  getCoordinates
 };

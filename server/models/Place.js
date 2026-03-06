@@ -34,7 +34,19 @@ const PlaceSchema = new mongoose.Schema({
     imageUrl: {
         type:       String,
         trim: true,
-    }
+    },
+    latitude:{
+        type:       Number,
+        min: -90,
+        max: 90,
+        default: null
+    },
+    longitude:{
+        type:       Number,
+        min: -180,
+        max: 180,
+        default: null
+    },
 });
 
 const Place = mongoose.model('place', PlaceSchema);
