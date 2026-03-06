@@ -46,7 +46,7 @@ In the future, Journey Log can be extended into an application with multi-user s
 
   - Migrated from using a JSON file for data storage to a MongoDB database, which uses the old JSON to initialize data for the first time
 
-  - Modularized the backend for easier navigation and separation of logic. folders like: routes (purely managing the routes), services(where the backend logic for communicating and updating the DB lies), controllers(appropriate status codes and method calls are handled here).
+  - Modularized the backend for easier navigation and separation of logic. folders like: routes (purely managing the routes), services(where the backend logic for communicating and updating the DB lies), controllers(appropriate status codes and api calls are handled here).
 
 3. Challenges
 
