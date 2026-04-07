@@ -6,6 +6,7 @@ import { FaTimes } from "react-icons/fa";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import PlaceChat from "../components/PlaceChat";
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -284,6 +285,11 @@ function Home() {
                   <RecenterMap coords={mapCoords} />
                 </MapContainer>
               </div>
+              <PlaceChat
+                placeId={selectedPlace._id}
+                initialComments={selectedPlace.comments || []}
+                isOpen={!!selectedPlace}
+              />
             </div>
           </div>
         </div>
