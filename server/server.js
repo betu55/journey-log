@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -23,7 +25,7 @@ app.use("/api/places", placesRouter);
 app.use("/api", (req, res) => {
   res.status(404).json({
     success: false,
-    error: "Endpoint Not Found"
+    error: "Endpoint Not Found",
   });
 });
 
@@ -55,7 +57,7 @@ connectDB()
 //     console.log('Database Connected');
 // });
 
-// // Add sample data to database 
+// // Add sample data to database
 // async function addTestPlacesToMongoDB() {
 //   try {
 //     const placeCount = await Place.countDocuments();
@@ -75,7 +77,6 @@ connectDB()
 // }
 // addTestPlacesToMongoDB();
 
-
 // // GET all places
 // app.get("/api/places", async (req, res) => {
 //    try {
@@ -87,7 +88,7 @@ connectDB()
 //     });
 
 //   } catch (error) {
-    
+
 //     return res.status(500).json({
 //       success: false,
 //       message: "Server Error"
@@ -103,21 +104,21 @@ connectDB()
 //     const place = await Place.findOne({
 //       placeName: { $regex: `^${name}$`, $options: "i" }
 //     });
-    
+
 //     if (place){
-//       res.status(200).json({ 
+//       res.status(200).json({
 //         success: true,
 //         data: place
 //       });
 //     } else {
 //       res.status(404).json({
-//         success: false, 
+//         success: false,
 //         error: "Place Not Found"
 //       });
 //     }
 
 //   } catch (error){
-    
+
 //     return res.status(500).json({
 //       success: false,
 //       message: "Server Error"
@@ -182,7 +183,7 @@ connectDB()
 //       const savedPlace = await newPlace.save();
 
 //       res.status(201).json({
-//         success: true, 
+//         success: true,
 //         data: savedPlace
 //       });
 
@@ -226,11 +227,11 @@ connectDB()
 //     const deletedPlace = await Place.findOneAndDelete({
 //       placeName: { $regex: `^${name}$`, $options: "i" }
 //     });
-    
+
 //     if (deletedPlace){
-//       res.status(200).json({ 
-//         success: true, 
-//         message: "Place Deleted Successfully" 
+//       res.status(200).json({
+//         success: true,
+//         message: "Place Deleted Successfully"
 //       });
 //     } else {
 //       res.status(404).json({
@@ -240,7 +241,7 @@ connectDB()
 //     }
 
 //   } catch (error){
-    
+
 //     return res.status(500).json({
 //       success: false,
 //       message: "Server Error"
@@ -263,14 +264,14 @@ connectDB()
 
 //     if(!updatePlace){
 //       return res.status(404).json({
-//         success: false, 
-//         message: "Place Not Found" 
+//         success: false,
+//         message: "Place Not Found"
 //       });
 //     }
 
-//     return res.status(200).json({ 
-//       success: true, 
-//       data: updatedPlace 
+//     return res.status(200).json({
+//       success: true,
+//       data: updatedPlace
 //     });
 //   } catch (error){
 
