@@ -51,6 +51,13 @@ const PlaceSchema = new mongoose.Schema({
         max: 180,
         default: null
     },
+    comments: [
+        {
+            username: String,
+            text: String,
+            time: { type: Date, default: Date.now }
+        }
+    ]
 });
 
 const Place = mongoose.model('place', PlaceSchema);
