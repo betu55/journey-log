@@ -24,6 +24,13 @@ In the future, Journey Log can be extended into an application with multi-user s
 
 - Once the project is up and running, click the URL in your terminal, and the app will open in a new tab on your browser.
 
+3. Login with test user account which already has default places added
+```bash 
+  Username: test
+  Password: password 
+``` 
+- Or register for your own account and add places using the registration feature
+
 ## Reflection
 
 1. Submitted Content
@@ -53,6 +60,8 @@ In the future, Journey Log can be extended into an application with multi-user s
   - Expanded PlaceCard feature: When a place is clicked a popup appears with an expanded view of the log. This includes the pinned location of the place on an interactive map using leaflet.
 
   - Location Coordinate lookup: The first time a PlaceCard is clicked and expanded, the backend calls nominatim openstreetmap api to fetch coordinates and saves the data to MongoDB for future use.
+  
+  - Authentication and authorization done using bcrypt and JWT tokens for improved security.
 
 3. Challenges
 
