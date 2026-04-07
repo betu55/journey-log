@@ -1,20 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const http = require("http");
 
 const { connectDB } = require("./src/init/connectDB");
 const { initDB } = require("./src/init/initDB");
+const { initSocket } = require("./src/init/socket");
 const placesRouter = require("./src/routes/places.routes");
 
 const app = express();
+const server = http.createServer(app);
 const PORT = 8080;
+
+initSocket(server);
 
 app.use(express.json());
 app.use(cors());
-// For CSS,Images
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/api/places", placesRouter);
+
 app.use("/api", (req, res) => {
   res.status(404).json({
     success: false,
@@ -22,15 +27,14 @@ app.use("/api", (req, res) => {
   });
 });
 
-// Connect to MongoDB and initialize database
 connectDB()
   .then(() => {
     console.log("Connected to MongoDB");
     return initDB();
   })
-  .then(()=>{
-    app.listen(PORT, () => {
-      console.log("Server now running on port: " + PORT);
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log("Server & Socket.io running on port: " + PORT);
     });
   })
   .catch((error) => {

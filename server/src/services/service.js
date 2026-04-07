@@ -149,6 +149,27 @@ async function register(userData){
 
 }
 
+
+async function addComment(placeId, commentData) {
+  const { username, text } = commentData;
+  return Place.findOneAndUpdate(
+    { _id: placeId },
+    { 
+      $push: { 
+        comments: { 
+          username, 
+          text, 
+          time: new Date() 
+        } 
+      } 
+    },
+    { returnDocument: "after" }
+  );
+}
+
+
+
+
 module.exports = {
   getAllPlaces,
   getOneByPlaceName,
@@ -160,5 +181,6 @@ module.exports = {
   updateById,
   getCoordinates,
   login,
-  register
+  register,
+ addComment 
 };
