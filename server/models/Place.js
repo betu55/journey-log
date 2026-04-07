@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
 const PlaceSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true
+    },
     id: {
         type:       Number,
-        unique:     true,
         required:   true,
     },
     placeName: {

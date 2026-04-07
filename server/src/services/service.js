@@ -1,19 +1,25 @@
 const Place = require("../../models/Place");
+const User = require("../../models/User");
+const jwt = require("jsonwebtoken");
 
-async function getAllPlaces() {
-  return Place.find();
+async function getAllPlaces(userId) {
+  return Place.find({user: userId});
 }
 
-async function getOneByPlaceName(placeName) {
-  return Place.findOne({placeName: { $regex: `^${placeName}$`, $options: "i" }});
+async function getOneByPlaceName(placeName, userId) {
+  return Place.findOne({
+    user : userId,
+    placeName: { $regex: `^${placeName}$`, $options: "i" }});
 }
 
-async function searchByPlaceName(placeName){
-  return Place.find({placeName: { $regex: placeName, $options: "i" }});
+async function searchByPlaceName(placeName, userId){
+  return Place.find({
+    user : userId,
+    placeName: { $regex: placeName, $options: "i" }});
 }
 
 async function createPlace(placeData){
-  const {placeName, location , dateVisited, description, rating, imageUrl} = placeData;
+  const {placeName, location , dateVisited, description, rating, imageUrl, userId} = placeData;
  
   if (!(placeName && location && dateVisited && description && rating)) {
     const err = new Error("Missing Required Fields");
@@ -21,10 +27,11 @@ async function createPlace(placeData){
     throw err;
   }
 
-  const lastPlace = await Place.findOne().sort({ id: -1 });
+  const lastPlace = await Place.findOne({user : userId}).sort({ id: -1 });
   const newId = lastPlace?.id? lastPlace.id + 1 : 1;
 
   const newPlace = new Place({
+    user : userId,
     id: newId,
     placeName,
     location,
@@ -37,33 +44,36 @@ async function createPlace(placeData){
   return newPlace.save();
 }
 
-async function deleteByPlaceName(placeName){
-  return Place.findOneAndDelete({placeName: { $regex: `^${placeName}$`, $options: "i" }});
+async function deleteByPlaceName(placeName, userId){
+  return Place.findOneAndDelete({
+    user : userId,
+    placeName: { $regex: `^${placeName}$`, $options: "i" }});
 }
 
-async function updateByPlaceName(placeName, updateData){
-  return Place.findOneAndUpdate(
-    {placeName: { $regex: `^${placeName}$`, $options: "i" }},
+async function updateByPlaceName(placeName, updateData, userId){
+  return Place.findOneAndUpdate({
+    user : userId,
+    placeName: { $regex: `^${placeName}$`, $options: "i" }},
     {$set: updateData},
     {returnDocument: "after", runValidators: true}
   );
 }
 
-async function deleteById(id){
-  return Place.findByIdAndDelete(id);
+async function deleteById(id, userId){
+  return Place.findOneAndDelete({ _id: id, user: userId });
 }
 
-async function updateById(id, updateData){
-  return Place.findByIdAndUpdate(
-    id,
+async function updateById(id, updateData, userId){
+  return Place.findOneAndUpdate(
+    { _id: id, user: userId },
     { $set: updateData },
     { returnDocument: "after", runValidators: true }
   );
 }
 
-async function getCoordinates(placeId){
+async function getCoordinates(placeId, userId){
   // Find place
-  const place = await Place.findById(placeId);
+  const place = await Place.findOne({ _id: placeId, user: userId });
   if(!place) throw new Error("Place Not Found");
 
   // If coords exist return them
@@ -95,6 +105,50 @@ async function getCoordinates(placeId){
 
 }
 
+async function login(userData){
+  const user = await User.findOne({username: userData.username}).select("+password"); //"+" to include a hidden field
+
+  if(!user) {
+    throw new Error("Username Does Not Exist");
+  }
+
+  const match = await user.comparePassword(userData.password);
+
+  if(!match) {
+    throw new Error("Incorrect Password");
+  }
+
+  const response = user.toObject();
+  delete response.password;
+
+  const token = jwt.sign(
+    {id: user._id, username: user.username}, 
+    process.env.JWT_SECRET,
+    {expiresIn: "1d"}
+  );
+
+  return {data: response, token};
+
+}
+
+async function register(userData){
+  const existingUser = await User.findOne({username: userData.username});
+
+  if(existingUser) {
+    throw new Error("Username Already Exists");
+  }
+
+  const user = new User(userData)
+
+  await user.save();
+
+  const response = user.toObject();
+  delete response.password;
+
+  return response;
+
+}
+
 module.exports = {
   getAllPlaces,
   getOneByPlaceName,
@@ -104,5 +158,7 @@ module.exports = {
   updateByPlaceName,
   deleteById,
   updateById,
-  getCoordinates
+  getCoordinates,
+  login,
+  register
 };
