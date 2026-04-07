@@ -27,12 +27,8 @@ async function createPlace(placeData){
     throw err;
   }
 
-  const lastPlace = await Place.findOne({user : userId}).sort({ id: -1 });
-  const newId = lastPlace?.id? lastPlace.id + 1 : 1;
-
   const newPlace = new Place({
     user : userId,
-    id: newId,
     placeName,
     location,
     dateVisited: new Date(dateVisited),
@@ -107,15 +103,16 @@ async function getCoordinates(placeId, userId){
 
 async function login(userData){
   const user = await User.findOne({username: userData.username}).select("+password"); //"+" to include a hidden field
+  console.log("Login attempt for username:", userData.username);
 
   if(!user) {
-    throw new Error("Username Does Not Exist");
+    throw new Error("Incorrect Username or Password");
   }
 
   const match = await user.comparePassword(userData.password);
 
   if(!match) {
-    throw new Error("Incorrect Password");
+    throw new Error("Incorrect Username or Password");
   }
 
   const response = user.toObject();

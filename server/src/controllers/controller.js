@@ -270,12 +270,17 @@ async function login(req, res){
       data: user
     });
   } catch(error){
-    if (error.message === "Username Does Not Exist" || error.message === "Incorrect Password") {
+    if (
+      error.message === "Username Does Not Exist" ||
+      error.message === "Incorrect Password" ||
+      error.message === "Incorrect Username or Password"
+    ) {
       return res.status(401).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
+    console.error("Login error:", error);
     return res.status(500).json({
       success: false,
       message: "Server Error"
@@ -330,7 +335,7 @@ async function requireAuth(req, res, next){
 
   if(!token){
     return res.status(401).json({
-      sucess: false,
+      success: false,
       message: "No Token"
     })
   }
