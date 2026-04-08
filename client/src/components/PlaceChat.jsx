@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import Button from "./Button";
 
 function PlaceChat({ placeId, initialComments = [], isOpen }) {
   const [messages, setMessages] = useState(initialComments);
@@ -40,7 +41,7 @@ function PlaceChat({ placeId, initialComments = [], isOpen }) {
 
     socketRef.current.emit("send_msg", {
       placeId,
-      text,
+      text: text.trim(),
     });
 
     setText("");
@@ -48,23 +49,35 @@ function PlaceChat({ placeId, initialComments = [], isOpen }) {
 
   return (
     <div className="place-chat">
-      <h3>Comments</h3>
+      <h3 className="place-chat-title">Comments</h3>
 
-      <div>
-        {messages.map((msg, i) => (
-          <div key={i}>
-            <strong>{msg.username}:</strong> {msg.text}
-          </div>
-        ))}
+      <div className="place-chat-messages">
+        {messages.length === 0 ? (
+          <p className="place-chat-empty">No comments yet. Start the conversation.</p>
+        ) : (
+          messages.map((msg, i) => (
+            <div key={i} className="place-chat-message">
+              <div className="place-chat-message-header">
+                <span className="place-chat-username">{msg.username}</span>
+                {msg.time && <span className="place-chat-time">{msg.time}</span>}
+              </div>
+              <p className="place-chat-text">{msg.text}</p>
+            </div>
+          ))
+        )}
       </div>
 
-      <form onSubmit={handleSend}>
+      <form onSubmit={handleSend} className="place-chat-form">
         <input
+          type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Write a comment..."
+          className="place-chat-input"
         />
-        <button type="submit">Send</button>
+        <Button type="submit" variant="primary" width="fit">
+          Send
+        </Button>
       </form>
     </div>
   );
