@@ -383,10 +383,18 @@
 .btn-danger-light:hover { background: #EB5f59; color: #fff; border-color: transparent;}
 .btn-edit-light { background: transparent; color: #888; border-color: #ddd; }
 .btn-edit-light:hover { background: #A1CCA5; color: #fff; border-color: transparent;}
+.btn-transparent { 
+  background: transparent; 
+  color: #555; border-color: transparent; 
+  padding: 0;
+  margin: 0;
+}
+.btn-transparent:hover { color: #A1CCA5; }
 
 .btn-auto { width: auto; }
 .btn-full { width: 100%; }
 .btn-fit { width: fit-content; }
+.btn-16 {width: 16rem;}
 
 .search-wrapper {
   width: 100%;             
@@ -511,6 +519,20 @@
   will-change: transform, opacity;
 }
 
+.banner-modal-content {
+  background: white;
+  max-width: 30rem;
+  max-height: 90vh;
+  border-radius: 12px;
+  position: relative;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.modal-header{
+  margin: 1rem;
+}
+
 .edit-modal-content{
   background: transparent;
   width: 90%;
@@ -573,4 +595,8 @@
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #ddd;
+}
+
+.account-banner{ 
+  background: transparent;
 }
