@@ -127,6 +127,11 @@
   transition: background-color 0.2s ease;
 }
 
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .add-form{
   display: flex;
   flex-direction: column;
@@ -664,19 +669,51 @@
 
 .place-chat-form {
   display: flex;
-  gap: 0.75rem;
-  align-items: center;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.place-chat-input-wrap {
+  flex: 4;
+}
+
+.place-chat-button-wrap {
+  flex: 1;
+}
+
+.place-chat-button-wrap .btn {
+  margin: 0 2rem 1.5rem 2rem;
 }
 
 .place-chat-input {
-  flex: 1;
+  width: 100%;
+  min-height: 88px;
   padding: 0.9rem 1rem;
   border: 1px solid #ddd;
   border-radius: 14px;
   font-size: 1rem;
+  resize: vertical;
+  font-family: inherit;
 }
 
 .place-chat-input:focus {
   border-color: #A1CCA5;
   box-shadow: 0 0 0 3px rgba(161,204,165,0.2);
+}
+
+.place-chat-counter {
+  width: 100%;
+  margin-top: 0.35rem;
+  text-align: right;
+  font-size: 0.82rem;
+  color: #777;
+}
+
+.place-chat-counter-danger {
+  color: #EB5f59;
+}
+
+.owner-name {
+  font-weight: 600;
+  color: #A1CCA5;
 }

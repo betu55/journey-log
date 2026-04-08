@@ -18,13 +18,15 @@ function PlaceCard({
   description,
   rating,
   imageUrl,
+  ownerName,
+  canManage = false,
   onDelete,
   onEdit,
   onClick,
 }) {
   return (
     <div className="place-card" onClick={onClick}>
-      {(onDelete || onEdit) && (
+      {canManage && (onDelete || onEdit) && (
         <div className="place-card__action">
           {onEdit && (
             <Button
@@ -60,6 +62,11 @@ function PlaceCard({
             <Stars value={rating} />
           </p>
         </div>
+        {ownerName && (
+          <p className="place-owner">
+            Shared by <span className="owner-name">@{ownerName}</span>{" "}
+          </p>
+        )}
         <p className="place-location">
           <FaMapMarkerAlt size={14} /> {location}
         </p>

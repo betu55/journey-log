@@ -50,7 +50,11 @@ const PlaceSchema = new mongoose.Schema({
     comments: [
         {
             username: String,
-            text: String,
+            text: {
+                type: String,
+                trim: true,
+                maxlength: 1000
+            },
             time: { type: Date, default: Date.now }
         }
     ]

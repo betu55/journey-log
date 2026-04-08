@@ -2,6 +2,8 @@ const { Server } = require("socket.io");
 const service = require("../services/service");
 const jwt = require("jsonwebtoken"); 
 
+const COMMENT_MAX_LENGTH = 1000;
+
 const initSocket = (server) => {
   const io = new Server(server, {
     cors: {
@@ -38,19 +40,26 @@ const initSocket = (server) => {
 
     socket.on("send_msg", async (data) => {
       const { placeId, text } = data;
+      const normalizedText = text?.trim();
 
       const username = socket.user.username;
+      const timestamp = new Date().toISOString();
+
+      if (!normalizedText || normalizedText.length > COMMENT_MAX_LENGTH) {
+        return;
+      }
 
       try {
-        await service.addComment(placeId, { username, text });
+        await service.addComment(placeId, { username, text: normalizedText, time: timestamp });
       } catch (err) {
         console.error("Save Comment Error:", err);
+        return;
       }
 
       io.to(placeId).emit("receive_msg", {
         username,
-        text,
-        time: new Date().toLocaleTimeString()
+        text: normalizedText,
+        time: timestamp
       });
     });
   });

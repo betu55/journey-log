@@ -53,7 +53,10 @@ function App() {
 
       <main className="main">
         <Routes>
-          <Route path="/" element={currentUser ? <Home /> : <Navigate to="/login" replace />} />
+          <Route
+            path="/"
+            element={currentUser ? <Home currentUser={currentUser} /> : <Navigate to="/login" replace />}
+          />
           <Route path="/addplace" element={currentUser ? <AddPlace /> : <Navigate to="/login" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={currentUser ? <Navigate to="/" replace /> : <Login />} />

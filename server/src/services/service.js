@@ -2,20 +2,31 @@ const Place = require("../../models/Place");
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
-async function getAllPlaces(userId) {
-  return Place.find({user: userId});
+const COMMENT_MAX_LENGTH = 1000;
+
+const PLACE_POPULATE = {
+  path: "user",
+  select: "username",
+};
+
+async function getAllPlaces() {
+  return Place.find()
+    .populate(PLACE_POPULATE)
+    .sort({ dateVisited: -1 });
 }
 
-async function getOneByPlaceName(placeName, userId) {
+async function getOneByPlaceName(placeName) {
   return Place.findOne({
-    user : userId,
-    placeName: { $regex: `^${placeName}$`, $options: "i" }});
+    placeName: { $regex: `^${placeName}$`, $options: "i" }
+  }).populate(PLACE_POPULATE);
 }
 
-async function searchByPlaceName(placeName, userId){
+async function searchByPlaceName(placeName){
   return Place.find({
-    user : userId,
-    placeName: { $regex: placeName, $options: "i" }});
+    placeName: { $regex: placeName, $options: "i" }
+  })
+    .populate(PLACE_POPULATE)
+    .sort({ dateVisited: -1 });
 }
 
 async function createPlace(placeData){
@@ -60,16 +71,25 @@ async function deleteById(id, userId){
 }
 
 async function updateById(id, updateData, userId){
+  const allowedUpdates = {
+    placeName: updateData.placeName,
+    location: updateData.location,
+    dateVisited: updateData.dateVisited,
+    description: updateData.description,
+    rating: updateData.rating,
+    imageUrl: updateData.imageUrl,
+  };
+
   return Place.findOneAndUpdate(
     { _id: id, user: userId },
-    { $set: updateData },
-    { returnDocument: "after", runValidators: true }
-  );
+    { $set: allowedUpdates },
+    { new: true, runValidators: true }
+  ).populate(PLACE_POPULATE);
 }
 
-async function getCoordinates(placeId, userId){
+async function getCoordinates(placeId){
   // Find place
-  const place = await Place.findOne({ _id: placeId, user: userId });
+  const place = await Place.findById(placeId);
   if(!place) throw new Error("Place Not Found");
 
   // If coords exist return them
@@ -148,15 +168,21 @@ async function register(userData){
 
 
 async function addComment(placeId, commentData) {
-  const { username, text } = commentData;
+  const { username, text, time } = commentData;
+  const normalizedText = text?.trim();
+
+  if (!normalizedText || normalizedText.length > COMMENT_MAX_LENGTH) {
+    throw new Error("Invalid Comment Length");
+  }
+
   return Place.findOneAndUpdate(
     { _id: placeId },
     { 
       $push: { 
         comments: { 
           username, 
-          text, 
-          time: new Date() 
+          text: normalizedText, 
+          time: time ? new Date(time) : new Date()
         } 
       } 
     },
