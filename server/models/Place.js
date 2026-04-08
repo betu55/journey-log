@@ -6,10 +6,6 @@ const PlaceSchema = new mongoose.Schema({
         ref: "user",
         required: true
     },
-    id: {
-        type:       Number,
-        required:   true,
-    },
     placeName: {
         type:       String,
         required:   true,

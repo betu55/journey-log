@@ -19,6 +19,12 @@ let DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
+const token = localStorage.getItem("token");
+
+const authHeaders = {
+  Authorization: `Bearer ${token}`,
+};
+
 function RecenterMap({ coords }) {
   const map = useMap();
   useEffect(() => {
@@ -40,7 +46,7 @@ function Home() {
     setSelectedPlace(place);
     
     try {
-      const res = await fetch(`http://localhost:8080/api/places/coords?id=${place._id}`);
+      const res = await fetch(`http://localhost:8080/api/places/coords?id=${place._id}`, { headers: authHeaders });
 
       if (!res.ok) throw new Error("Failed to fetch coordinates");
 
@@ -60,7 +66,7 @@ function Home() {
     try {
       const res = await fetch(
       `http://localhost:8080/api/places/${place._id}`,
-      { method: "DELETE" }
+      { method: "DELETE", headers: authHeaders }
       );
       if (!res.ok) throw new Error("Failed to delete place");
       setPlaces(prev => prev.filter(p => p._id !== place._id));
@@ -77,7 +83,7 @@ function Home() {
         `http://localhost:8080/api/places/${editingPlace._id}`,
       {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...authHeaders },
         body: JSON.stringify(editingPlace)
       }
     );
@@ -105,7 +111,7 @@ function Home() {
         if (searchQuery.trim() !== "") {
           url += `/search?placeName=${encodeURIComponent(searchQuery)}`;
         }
-        const res = await fetch(url);
+        const res = await fetch(url, { headers: authHeaders });
         const body = await res.json();
         setPlaces(body.data || []);
       } catch (err) {

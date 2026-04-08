@@ -24,26 +24,32 @@ function AddPlace() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
-        
-        try {
-            const response = await fetch('http://localhost:8080/api/places', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
+    e.preventDefault();
+    const token = localStorage.getItem('token');
 
-            if (response.ok) {
-                alert('Place added successfully!');
-                navigate('/'); 
-            } else {
-                alert('Failed to save. Ensure all fields are filled correctly.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Network error, make sure backend is running.');
+    try {
+        const response = await fetch('http://localhost:8080/api/places', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            alert('Place added successfully!');
+            navigate('/');
+        } else if (response.status === 401) {
+            alert('You must be logged in to add a place. Please log in again.');
+        } else {
+            alert('Failed to save. Ensure all fields are filled correctly.');
         }
-    };
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Network error, make sure backend is running.');
+    }
+};
 
     return (
         <div className="page">
