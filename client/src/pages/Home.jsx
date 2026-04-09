@@ -30,7 +30,7 @@ function RecenterMap({ coords }) {
   return null;
 }
 
-function Home({ currentUser }) {
+function Home({ currentUser, socket }) {
   const [places, setPlaces] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -58,23 +58,29 @@ function Home({ currentUser }) {
     return getOwnerId(place) === currentUser?._id;
   }
 
-  function handleCommentReceived(comment) {
-    if (!selectedPlace?._id) return;
+  useEffect(() => {
+    const handleCommentReceived = (event) => {
+      const newMsg = event.detail;
 
-    setPlaces((prev) =>
-      prev.map((place) =>
-        place._id === selectedPlace._id
-          ? { ...place, comments: [...(place.comments || []), comment] }
-          : place
-      )
-    );
+      setPlaces((prev) =>
+        prev.map((place) =>
+          place._id === newMsg.placeId
+            ? { ...place, comments: [...(place.comments || []), newMsg] }
+            : place
+        )
+      );
 
-    setSelectedPlace((prev) =>
-      prev
-        ? { ...prev, comments: [...(prev.comments || []), comment] }
-        : prev
-    );
-  }
+      setSelectedPlace((prev) => {
+        if (prev?._id === newMsg.placeId) {
+          return { ...prev, comments: [...(prev.comments || []), newMsg] };    
+        }
+        return prev;
+      });
+    };
+
+    window.addEventListener("socket_msg_received", handleCommentReceived);
+    return () => window.removeEventListener("socket_msg_received", handleCommentReceived);
+  }, []); 
 
   async function handleViewMap(place) {
     setSelectedPlace(place);
@@ -376,9 +382,8 @@ function Home({ currentUser }) {
 
               <PlaceChat
                 placeId={selectedPlace._id}
+                socket={socket}
                 initialComments={selectedPlace.comments || []}
-                isOpen={!!selectedPlace}
-                onMessageReceived={handleCommentReceived}
               />
             </div>
           </div>

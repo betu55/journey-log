@@ -26,47 +26,26 @@ function formatCommentTime(value) {
   return `${commentTimeFormatter.format(date)} ET`;
 }
 
-function PlaceChat({ placeId, initialComments = [], isOpen, onMessageReceived }) {
-  const [messages, setMessages] = useState(initialComments);
+function PlaceChat({ placeId, initialComments = [], socket}) {
   const [text, setText] = useState("");
-  const socketRef = useRef(null);
+  const newMessage = useRef(null)
+
+  const scrollToBottom = () => {
+    newMessage.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
-    setMessages(initialComments || []);
-  }, [initialComments, placeId]);
-
-  useEffect(() => {
-    if (!isOpen || !placeId) return;
-
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    const socket = io("http://localhost:8080", {
-      auth: { token }
-    });
-
-    socketRef.current = socket;
-
-    socket.on("connect", () => {
-      socket.emit("join_place", placeId);
-    });
-
-    socket.on("receive_msg", (msg) => {
-      setMessages((prev) => [...prev, msg]);
-      onMessageReceived?.(msg);
-    });
-
-    return () => socket.disconnect();
-  }, [placeId, isOpen, onMessageReceived]);
+    scrollToBottom();
+  }, [initialComments]);
 
   function handleSend(e) {
     e.preventDefault();
 
     const trimmedText = text.trim();
 
-    if (!trimmedText || !socketRef.current) return;
+    if (!trimmedText || !socket) return;
 
-    socketRef.current.emit("send_msg", {
+    socket.emit("send_msg", {
       placeId,
       text: trimmedText,
     });
@@ -79,10 +58,10 @@ function PlaceChat({ placeId, initialComments = [], isOpen, onMessageReceived })
       <h3 className="place-chat-title">Comments</h3>
 
       <div className="place-chat-messages">
-        {messages.length === 0 ? (
+        {initialComments.length === 0 ? (
           <p className="place-chat-empty">No comments yet. Start the conversation.</p>
         ) : (
-          messages.map((msg, i) => (
+          initialComments.map((msg, i) => (
             <div key={i} className="place-chat-message">
               <div className="place-chat-message-header">
                 <span className="place-chat-username">{msg.username}</span>
@@ -94,6 +73,7 @@ function PlaceChat({ placeId, initialComments = [], isOpen, onMessageReceived })
             </div>
           ))
         )}
+         <div ref={newMessage}/>
       </div>
 
       <form onSubmit={handleSend} className="place-chat-form">

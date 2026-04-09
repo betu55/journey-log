@@ -17,7 +17,6 @@ async function getAllPlaces() {
 
 async function getAllPlacesUser(userId) {
   return Place.find({user : userId,})
-    .populate(PLACE_POPULATE)
     .sort({ dateVisited: -1 });
 }
 
@@ -40,7 +39,6 @@ async function searchByPlaceNameUser(placeName, userId){
     user : userId,
     placeName: { $regex: placeName, $options: "i" }
   })
-    .populate(PLACE_POPULATE)
     .sort({ dateVisited: -1 });
 }
 
@@ -181,6 +179,23 @@ async function register(userData){
 
 }
 
+async function getRelevantPlaces(userData) {
+  try {
+    const places = await Place.find({
+      $or: [
+        { user: userData.id }, 
+        { "comments.username": userData.username}
+      ]
+    }).select('_id');
+    return places.map(p => p._id.toString());
+
+  } catch (err) {
+
+    console.error("Error fetching relevant places:", err);
+    return [];
+  }
+}
+
 
 async function addComment(placeId, commentData) {
   const { username, text, time } = commentData;
@@ -222,5 +237,6 @@ module.exports = {
   getCoordinates,
   login,
   register,
- addComment 
+  addComment,
+  getRelevantPlaces 
 };

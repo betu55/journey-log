@@ -629,6 +629,9 @@
   border: 1px solid #ececec;
   border-radius: 14px;
   background: white;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 .place-chat-empty {
@@ -638,6 +641,7 @@
 }
 
 .place-chat-message {
+  flex-shrink: 0;
   padding: 0.8rem 0;
   border-bottom: 1px solid #f0f0f0;
 }
@@ -711,6 +715,43 @@
 
 .place-chat-counter-danger {
   color: #EB5f59;
+}
+
+.notification{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background: #A1CCA5;
+  color: black;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 9999;
+}
+
+.notification-header strong {
+  display: block;
+  margin-bottom: 4px;
+  color: black;
+}
+
+.notification-header p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.close{
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 0 0 10px;
 }
 
 .owner-name {

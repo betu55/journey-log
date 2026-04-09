@@ -30,7 +30,7 @@ function RecenterMap({ coords }) {
   return null;
 }
 
-function Home({ currentUser }) {
+function Home({currentUser, socket}) {
   const [places, setPlaces] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -44,23 +44,38 @@ function Home({ currentUser }) {
     Authorization: `Bearer ${token}`,
   };
 
-  function handleCommentReceived(comment) {
-    if (!selectedPlace?._id) return;
-
-    setPlaces((prev) =>
-      prev.map((place) =>
-        place._id === selectedPlace._id
-          ? { ...place, comments: [...(place.comments || []), comment] }
-          : place
-      )
-    );
-
-    setSelectedPlace((prev) =>
-      prev
-        ? { ...prev, comments: [...(prev.comments || []), comment] }
-        : prev
-    );
+  function getOwnerId(place) {
+    if (!place?.user) return null;
+    return typeof place.user === "string" ? place.user : place.user._id;
   }
+
+  function canManagePlace(place) {
+    return getOwnerId(place) === currentUser?._id;
+  }
+
+  useEffect(() => {
+    const handleCommentReceived = (event) => {
+      const newMsg = event.detail;
+
+      setPlaces((prev) =>
+        prev.map((place) =>
+          place._id === newMsg.placeId
+            ? { ...place, comments: [...(place.comments || []), newMsg] }
+            : place
+        )
+      );
+
+      setSelectedPlace((prev) => {
+        if (prev?._id === newMsg.placeId) {
+          return { ...prev, comments: [...(prev.comments || []), newMsg] };    
+        }
+        return prev;
+      });
+    };
+
+    window.addEventListener("socket_msg_received", handleCommentReceived);
+    return () => window.removeEventListener("socket_msg_received", handleCommentReceived);
+  }, []); 
 
   async function handleViewMap(place) {
     setSelectedPlace(place);
@@ -203,6 +218,7 @@ function Home({ currentUser }) {
                 {...place}
                 dateVisited={place.dateVisited?.split("T")[0]}
                 imageUrl={place.imageUrl || "/images/default-Image.jpg"}
+                canManage={canManagePlace(place)}
                 onDelete={() => handleDelete(place)}
                 onEdit={() => setEditingPlace(place)}
                 onClick={() => handleViewMap(place)}
@@ -356,10 +372,9 @@ function Home({ currentUser }) {
               </div>
 
               <PlaceChat
+                socket={socket}
                 placeId={selectedPlace._id}
                 initialComments={selectedPlace.comments || []}
-                isOpen={!!selectedPlace}
-                onMessageReceived={handleCommentReceived}
               />
             </div>
           </div>
