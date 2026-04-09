@@ -15,6 +15,11 @@ async function getAllPlaces() {
     .sort({ dateVisited: -1 });
 }
 
+async function getAllPlacesUser(userId) {
+  return Place.find({user : userId,})
+    .sort({ dateVisited: -1 });
+}
+
 async function getOneByPlaceName(placeName) {
   return Place.findOne({
     placeName: { $regex: `^${placeName}$`, $options: "i" }
@@ -26,6 +31,14 @@ async function searchByPlaceName(placeName){
     placeName: { $regex: placeName, $options: "i" }
   })
     .populate(PLACE_POPULATE)
+    .sort({ dateVisited: -1 });
+}
+
+async function searchByPlaceNameUser(placeName, userId){
+  return Place.find({
+    user : userId,
+    placeName: { $regex: placeName, $options: "i" }
+  })
     .sort({ dateVisited: -1 });
 }
 
@@ -166,6 +179,23 @@ async function register(userData){
 
 }
 
+async function getRelevantPlaces(userData) {
+  try {
+    const places = await Place.find({
+      $or: [
+        { user: userData.id }, 
+        { "comments.username": userData.username}
+      ]
+    }).select('_id');
+    return places.map(p => p._id.toString());
+
+  } catch (err) {
+
+    console.error("Error fetching relevant places:", err);
+    return [];
+  }
+}
+
 
 async function addComment(placeId, commentData) {
   const { username, text, time } = commentData;
@@ -195,8 +225,10 @@ async function addComment(placeId, commentData) {
 
 module.exports = {
   getAllPlaces,
+  getAllPlacesUser,
   getOneByPlaceName,
   searchByPlaceName,
+  searchByPlaceNameUser,
   createPlace,
   deleteByPlaceName,
   updateByPlaceName,
@@ -205,5 +237,6 @@ module.exports = {
   getCoordinates,
   login,
   register,
- addComment 
+  addComment,
+  getRelevantPlaces 
 };

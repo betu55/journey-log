@@ -30,7 +30,7 @@ function RecenterMap({ coords }) {
   return null;
 }
 
-function Home({ currentUser, socket }) {
+function Home({currentUser, socket}) {
   const [places, setPlaces] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -47,11 +47,6 @@ function Home({ currentUser, socket }) {
   function getOwnerId(place) {
     if (!place?.user) return null;
     return typeof place.user === "string" ? place.user : place.user._id;
-  }
-
-  function getOwnerName(place) {
-    if (!place?.user) return "Unknown user";
-    return typeof place.user === "string" ? "Unknown user" : place.user.username;
   }
 
   function canManagePlace(place) {
@@ -179,7 +174,7 @@ function Home({ currentUser, socket }) {
       setError(null);
 
       try {
-        let url = "http://localhost:8080/api/places";
+        let url = "http://localhost:8080/api/places/personal";
 
         if (searchQuery.trim() !== "") {
           url += `/search?placeName=${encodeURIComponent(searchQuery)}`;
@@ -204,7 +199,7 @@ function Home({ currentUser, socket }) {
   return (
     <div className="page">
       <div className="page-header">
-        <h1>Explore Places</h1>
+        <h1>Personal Places</h1>
         <SearchBar placeName={searchQuery} setPlaceName={setSearchQuery} />
       </div>
       <br />
@@ -223,7 +218,6 @@ function Home({ currentUser, socket }) {
                 {...place}
                 dateVisited={place.dateVisited?.split("T")[0]}
                 imageUrl={place.imageUrl || "/images/default-Image.jpg"}
-                ownerName={getOwnerName(place)}
                 canManage={canManagePlace(place)}
                 onDelete={() => handleDelete(place)}
                 onEdit={() => setEditingPlace(place)}
@@ -359,9 +353,6 @@ function Home({ currentUser, socket }) {
             <div className="modal-body">
               <h2>{selectedPlace.placeName}</h2>
               <p>
-                <strong>Shared by:</strong> {getOwnerName(selectedPlace)}
-              </p>
-              <p>
                 <strong>Location:</strong> {selectedPlace.location}
               </p>
               <p>{selectedPlace.description}</p>
@@ -381,8 +372,8 @@ function Home({ currentUser, socket }) {
               </div>
 
               <PlaceChat
-                placeId={selectedPlace._id}
                 socket={socket}
+                placeId={selectedPlace._id}
                 initialComments={selectedPlace.comments || []}
               />
             </div>

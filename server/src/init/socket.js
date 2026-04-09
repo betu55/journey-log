@@ -30,7 +30,16 @@ const initSocket = (server) => {
     }
   });
 
-  io.on("connection", (socket) => {
+  io.on("connection", async(socket) => {
+    try {
+      const placeIds = await service.getRelevantPlaces(socket.user);
+      placeIds.forEach((id) => {
+        socket.join(id.toString());
+      });
+    } catch (err) {
+      console.error("Auto-join error:", err);
+      return
+    }
 
     console.log(`User connected: ${socket.user.username}`);
 
@@ -50,17 +59,23 @@ const initSocket = (server) => {
       }
 
       try {
-        await service.addComment(placeId, { username, text: normalizedText, time: timestamp });
+        
+        socket.join(placeId);
+        const placeData = await service.addComment(placeId, { username, text: normalizedText, time: timestamp });
+
+        io.to(placeId).emit("receive_msg", {
+        username,
+        placeId: placeId,
+        placeName : placeData.placeName,
+        text: normalizedText,
+        time: timestamp
+      });
+
       } catch (err) {
         console.error("Save Comment Error:", err);
         return;
       }
-
-      io.to(placeId).emit("receive_msg", {
-        username,
-        text: normalizedText,
-        time: timestamp
-      });
+      
     });
   });
 };

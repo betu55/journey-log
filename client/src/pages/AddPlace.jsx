@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button'; 
 import AddPlaceForm from '../components/AddPlaceForm';
 
-function AddPlace() {
+function AddPlace({socket}) {
     const navigate = useNavigate();
     
     const [formData, setFormData] = useState({
@@ -38,6 +38,10 @@ function AddPlace() {
         });
 
         if (response.ok) {
+            const newPlace = await response.json();
+            if(socket){
+                socket.emit("join_place", newPlace.data._id);
+            }
             alert('Place added successfully!');
             navigate('/');
         } else if (response.status === 401) {

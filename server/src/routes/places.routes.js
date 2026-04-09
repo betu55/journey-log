@@ -4,7 +4,9 @@ const controller = require("../controllers/controller");
 
 // Define routes for places
 router.get("/", controller.requireAuth, controller.getAllPlaces);
+router.get("/personal", controller.requireAuth, controller.getAllPlacesUser);
 router.get("/search", controller.requireAuth, controller.searchByPlaceName);
+router.get("/personal/search", controller.requireAuth, controller.searchByPlaceNameUser);
 router.get("/placeName/:placeName", controller.requireAuth, controller.getOneByPlaceName);
 router.get("/coords", controller.requireAuth, controller.getCoordinates);
 
