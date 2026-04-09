@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Error404 from "./pages/Error404";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Personal from "./pages/Personal";
 import AccountBanner from "./components/AccountBanner";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                   Home
                 </NavLink>
                 <NavLink to="/addplace">Add Place</NavLink>
+                <NavLink to="/personal">Personal</NavLink>
               </>
             )}
             <NavLink to="/about">About</NavLink>
@@ -58,6 +60,7 @@ function App() {
             element={currentUser ? <Home currentUser={currentUser} /> : <Navigate to="/login" replace />}
           />
           <Route path="/addplace" element={currentUser ? <AddPlace /> : <Navigate to="/login" replace />} />
+          <Route path="/personal" element={currentUser ? <Personal /> : <Navigate to="/login" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/login" element={currentUser ? <Navigate to="/" replace /> : <Login />} />
           <Route path="/register" element={currentUser ? <Navigate to="/" replace /> : <Register />} />

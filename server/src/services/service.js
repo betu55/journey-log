@@ -15,6 +15,12 @@ async function getAllPlaces() {
     .sort({ dateVisited: -1 });
 }
 
+async function getAllPlacesUser(userId) {
+  return Place.find({user : userId,})
+    .populate(PLACE_POPULATE)
+    .sort({ dateVisited: -1 });
+}
+
 async function getOneByPlaceName(placeName) {
   return Place.findOne({
     placeName: { $regex: `^${placeName}$`, $options: "i" }
@@ -23,6 +29,15 @@ async function getOneByPlaceName(placeName) {
 
 async function searchByPlaceName(placeName){
   return Place.find({
+    placeName: { $regex: placeName, $options: "i" }
+  })
+    .populate(PLACE_POPULATE)
+    .sort({ dateVisited: -1 });
+}
+
+async function searchByPlaceNameUser(placeName, userId){
+  return Place.find({
+    user : userId,
     placeName: { $regex: placeName, $options: "i" }
   })
     .populate(PLACE_POPULATE)
@@ -195,8 +210,10 @@ async function addComment(placeId, commentData) {
 
 module.exports = {
   getAllPlaces,
+  getAllPlacesUser,
   getOneByPlaceName,
   searchByPlaceName,
+  searchByPlaceNameUser,
   createPlace,
   deleteByPlaceName,
   updateByPlaceName,

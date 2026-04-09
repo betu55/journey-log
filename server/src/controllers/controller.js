@@ -6,7 +6,22 @@ const jwt = require('jsonwebtoken');
 // Get all places
 async function getAllPlaces(req, res){
   try{ 
-    const places = await service.getAllPlaces(req.user.id);
+    const places = await service.getAllPlaces();
+    return res.status(200).json({
+      success: true,
+      data: places
+    });
+  } catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+async function getAllPlacesUser(req, res){
+  try{ 
+    const places = await service.getAllPlacesUser(req.user.id);
     return res.status(200).json({
       success: true,
       data: places
@@ -23,7 +38,7 @@ async function getAllPlaces(req, res){
 async function getOneByPlaceName(req, res){
   try{
     const name = req.params.placeName;
-    const place = await service.getOneByPlaceName(name, req.user.id);
+    const place = await service.getOneByPlaceName(name);
 
     if(!place){
       return res.status(404).json({
@@ -57,7 +72,32 @@ async function searchByPlaceName(req, res){
       });
     }
 
-    const places = await service.searchByPlaceName(name, req.user.id);
+    const places = await service.searchByPlaceName(name);
+
+    return res.status(200).json({
+      success: true,
+      data: places
+    });
+  }catch{
+    return res.status(500).json({
+      success: false,
+      message: "Server Error"
+    });
+  }
+}
+
+async function searchByPlaceNameUser(req, res){
+  try{
+    const name = req.query.placeName;
+    
+    if(!name){
+      return res.status(400).json({
+        success: false,
+        error: "Place Name is Required"
+      });
+    }
+
+    const places = await service.searchByPlaceNameUser(name, req.user.id);
 
     return res.status(200).json({
       success: true,
@@ -343,8 +383,10 @@ async function requireAuth(req, res, next){
 
 module.exports = {
   getAllPlaces,
+  getAllPlacesUser,
   getOneByPlaceName,
   searchByPlaceName,
+  searchByPlaceNameUser,
   createPlace,
   deleteByPlaceName,
   updateByPlaceName,
