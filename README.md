@@ -68,6 +68,8 @@ In the future, Journey Log can be extended into an application with multi-user s
   - Location Coordinate lookup: The first time a PlaceCard is clicked and expanded, the backend calls nominatim openstreetmap api to fetch coordinates and saves the data to MongoDB for future use.
   
   - Authentication and authorization done using bcrypt and JWT tokens for improved security.
+    
+  - Live push notifications for comments using socket.io (To test this, please log in using two separate accounts on two separate browsers).
 
 3. Challenges
 
