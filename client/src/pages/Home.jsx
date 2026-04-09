@@ -384,6 +384,7 @@ function Home({ currentUser, socket }) {
                 placeId={selectedPlace._id}
                 socket={socket}
                 initialComments={selectedPlace.comments || []}
+                creatorUsername={getOwnerName(selectedPlace)}
               />
             </div>
           </div>

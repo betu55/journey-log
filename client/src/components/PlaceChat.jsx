@@ -26,7 +26,7 @@ function formatCommentTime(value) {
   return `${commentTimeFormatter.format(date)} ET`;
 }
 
-function PlaceChat({ placeId, initialComments = [], socket}) {
+function PlaceChat({ placeId, initialComments = [], socket, creatorUsername }) {
   const [text, setText] = useState("");
   const newMessage = useRef(null)
 
@@ -61,17 +61,27 @@ function PlaceChat({ placeId, initialComments = [], socket}) {
         {initialComments.length === 0 ? (
           <p className="place-chat-empty">No comments yet. Start the conversation.</p>
         ) : (
-          initialComments.map((msg, i) => (
-            <div key={i} className="place-chat-message">
-              <div className="place-chat-message-header">
-                <span className="place-chat-username">{msg.username}</span>
-                {msg.time && (
-                  <span className="place-chat-time">{formatCommentTime(msg.time)}</span>
-                )}
+          initialComments.map((msg, i) => {
+            const isCreator =
+              msg.username?.toLowerCase() === creatorUsername?.toLowerCase();
+
+            return (
+              <div key={i} className="place-chat-message">
+                <div className="place-chat-message-header">
+                  <span className="place-chat-username">
+                    {msg.username}
+                    {isCreator && (
+                      <span className="place-chat-creator-badge">Creator</span>
+                    )}
+                  </span>
+                  {msg.time && (
+                    <span className="place-chat-time">{formatCommentTime(msg.time)}</span>
+                  )}
+                </div>
+                <p className="place-chat-text">{msg.text}</p>
               </div>
-              <p className="place-chat-text">{msg.text}</p>
-            </div>
-          ))
+            );
+          })
         )}
          <div ref={newMessage}/>
       </div>
