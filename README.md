@@ -24,10 +24,16 @@ In the future, Journey Log can be extended into an application with multi-user s
 
 - Once the project is up and running, click the URL in your terminal, and the app will open in a new tab on your browser.
 
-3. Login with test user account which already has default places added
+3. Log in with one of these test user accounts, which already has default places added
 ```bash 
   Username: test
-  Password: password 
+  Password: password
+
+  Username: Bemmy
+  Password: Sasuke
+
+  Username: Tom
+  Password: Sasuke 
 ``` 
 - Or register for your own account and add places using the registration feature
 
