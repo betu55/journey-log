@@ -9,15 +9,17 @@ In the future, Journey Log can be extended into an application with multi-user s
 1. In the root directory (Easier), uses a package called *concurrently*
 
 ```bash
+  cp server/.env.example server/.env
   npm install
   npm run install-all
   npm run dev
 ```
 
-- This will install dependencies for the client and server modules, then run both concurrently.
+- This copies the required server environment file, installs dependencies for the client and server modules, then runs both concurrently.
 
 2. Use two separate terminals (classic way), to go under each directory `/client` and `/server` and run the following:
 ```bash
+  cp .env.example .env (Server only)
   npm install
   npm run dev
 ```
