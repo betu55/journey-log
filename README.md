@@ -28,12 +28,6 @@ In the future, Journey Log can be extended into an application with multi-user s
 ```bash 
   Username: test
   Password: password
-
-  Username: Bemmy
-  Password: Sasuke
-
-  Username: Tom
-  Password: Sasuke 
 ``` 
 - Or register for your own account and add places using the registration feature
 
